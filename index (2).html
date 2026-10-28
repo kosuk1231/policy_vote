@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>정책제안 — 서울특별시사회복지사협회</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  /* Variable Typography (variable-typography) — CSS custom properties */
+  :root{
+    --ism-color-1:#F3F6F1; --ism-color-2:#151617; --ism-color-3:#1E7A69; --ism-color-4:#A8C7BD;
+    --ism-color-background:#F3F6F1; --ism-color-foreground:#151617; --ism-color-accent:#1E7A69;
+    --ism-color-surface:#E1E4E0; --ism-color-muted:#8F918F; --ism-color-border:#C2C5C1;
+    --ism-gutter:16px; --ism-space-min:20px; --ism-space-max:20px; --ism-page-margin:40px;
+    --ism-line-height:1.5; --ism-motion-duration:150ms; --ism-motion-easing:cubic-bezier(0.4,0,0.2,1);
+    --display:"SUIT Variable","Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    --body:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    --h1:clamp(36px,5.2vw,56px); --warn:#B23A2E;
+    box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:var(--body);font-size:16px;line-height:var(--ism-line-height);background:var(--ism-color-background);color:var(--ism-color-foreground);
+    font-variation-settings:"wght" 430;-webkit-font-smoothing:antialiased}
+  /* 가변 축 전환 공통 — 단순·저비용(폰트 축만 변화) */
+  .vt,a,button,h1,h2,h3,.tile,.row h3{transition:font-variation-settings var(--ism-motion-duration) var(--ism-motion-easing),color var(--ism-motion-duration) var(--ism-motion-easing),background-color var(--ism-motion-duration) var(--ism-motion-easing),border-color var(--ism-motion-duration) var(--ism-motion-easing)}
+  a{color:var(--ism-color-accent);text-decoration:none;cursor:pointer}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  h1{font-family:var(--display);font-size:var(--h1);line-height:1.12;letter-spacing:-.025em;margin:0;font-variation-settings:"wght" 480}
+  h1 b,h1 strong{font-weight:normal;font-variation-settings:"wght" 860;transition:font-variation-settings var(--ism-motion-duration) var(--ism-motion-easing)}
+  h1 b:hover{font-variation-settings:"wght" 900}
+  h2{font-family:var(--display);font-size:32px;line-height:1.22;letter-spacing:-.02em;margin:0 0 14px;font-variation-settings:"wght" 720}
+  h3{font-family:var(--display);font-size:22px;line-height:1.3;letter-spacing:-.015em;margin:0;font-variation-settings:"wght" 640}
+  @media(max-width:600px){h2{font-size:26px}h3{font-size:19px}}
+  p{margin:0 0 12px}
+  .lead{font-size:18px;color:#3a3d3b;max-width:620px;font-variation-settings:"wght" 420}
+  .muted{color:var(--ism-color-muted)} .small{font-size:13.5px} .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:.02em}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ism-color-accent);font-variation-settings:"wght" 700;margin-bottom:12px}
+
+  .wrap{max-width:1200px;margin:0 auto;padding:0 var(--ism-page-margin)}
+  @media(max-width:700px){.wrap{padding:0 20px}}
+  header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(243,246,241,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--ism-color-border)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+  .brand{font-family:var(--display);font-size:20px;letter-spacing:-.02em;font-variation-settings:"wght" 800;cursor:pointer;color:var(--ism-color-foreground);display:flex;align-items:baseline;gap:10px}
+  .brand small{font-family:var(--body);font-size:12px;color:var(--ism-color-muted);font-variation-settings:"wght" 500;letter-spacing:0}
+  .brand:hover{font-variation-settings:"wght" 900}
+  nav.nl{display:flex;gap:4px}
+  nav.nl a{color:var(--ism-color-foreground);font-size:14.5px;padding:8px 12px;font-variation-settings:"wght" 460;border-radius:4px}
+  nav.nl a:hover,nav.nl a.on{font-variation-settings:"wght" 780;color:var(--ism-color-accent)}
+  nav.nl a.dim{color:var(--ism-color-muted)} nav.nl a.dim:hover{color:var(--ism-color-foreground)}
+  @media(max-width:700px){nav.nl a{padding:8px 8px;font-size:13.5px}.brand small{display:none}}
+  main{padding:44px 0 90px}
+  @media(max-width:700px){main{padding:28px 0 70px}}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:15px;padding:13px 22px;border-radius:4px;border:1px solid var(--ism-color-foreground);background:var(--ism-color-foreground);color:var(--ism-color-background);font-variation-settings:"wght" 620;text-decoration:none}
+  .btn:hover{font-variation-settings:"wght" 820}
+  .btn.accent{background:var(--ism-color-accent);border-color:var(--ism-color-accent)}
+  .btn.ghost{background:transparent;color:var(--ism-color-foreground)} .btn.ghost:hover{background:var(--ism-color-surface)}
+  .btn.sm{padding:8px 14px;font-size:13.5px} .btn.block{width:100%}
+  .btn:disabled{opacity:.45;cursor:not-allowed;font-variation-settings:"wght" 620}
+
+  .card{background:var(--ism-color-surface);border:1px solid var(--ism-color-border);border-radius:6px;padding:28px}
+  @media(max-width:700px){.card{padding:20px 16px}}
+  .grid12{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--ism-gutter)}
+  .c6{grid-column:span 6} .c4{grid-column:span 4} .c8{grid-column:span 8} .c12{grid-column:span 12}
+  @media(max-width:860px){.c6,.c4,.c8{grid-column:span 12}}
+  .stack>*+*{margin-top:var(--ism-space-max)}
+  .hr{border:none;border-top:1px solid var(--ism-color-border);margin:var(--ism-space-max) 0}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:7fr 5fr;gap:32px;align-items:center;margin-bottom:48px}
+  .hero .glyphbox{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;border:1px solid var(--ism-color-border);border-radius:6px;background:linear-gradient(var(--ism-color-border) 1px,transparent 1px) 0 0/100% 48px,linear-gradient(90deg,var(--ism-color-border) 1px,transparent 1px) 0 0/48px 100%;background-color:var(--ism-color-surface);overflow:hidden}
+  .glyph{font-family:var(--display);font-size:clamp(150px,20vw,260px);line-height:1;letter-spacing:-.04em;font-variation-settings:"wght" 300;color:var(--ism-color-foreground);transition:font-variation-settings 150ms var(--ism-motion-easing);user-select:none}
+  .glyphbox:hover .glyph{font-variation-settings:"wght" 880}
+  .axis{position:absolute;bottom:12px;left:14px;right:14px;display:flex;justify-content:space-between;color:var(--ism-color-muted)}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}.hero .glyphbox{min-height:200px}}
+
+  /* 단계 */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--ism-gutter);margin:36px 0}
+  .step{border-top:2px solid var(--ism-color-border);padding-top:12px}
+  .step .n{font-family:var(--display);font-size:30px;line-height:1;font-variation-settings:"wght" 260;color:var(--ism-color-muted)}
+  .step .t{margin-top:6px;font-size:14.5px;font-variation-settings:"wght" 560;color:var(--ism-color-muted)}
+  .step.done{border-top-color:var(--ism-color-4)} .step.done .n{color:var(--ism-color-foreground);font-variation-settings:"wght" 500}
+  .step.active{border-top-color:var(--ism-color-accent)} .step.active .n{color:var(--ism-color-accent);font-variation-settings:"wght" 860} .step.active .t{color:var(--ism-color-foreground);font-variation-settings:"wght" 760}
+  @media(max-width:600px){.steps{grid-template-columns:repeat(2,1fr)}}
+  .badge{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;padding:5px 11px;border:1px solid var(--ism-color-border);border-radius:999px;background:var(--ism-color-background);font-variation-settings:"wght" 620}
+  .badge .pip{width:7px;height:7px;border-radius:50%;background:var(--ism-color-accent)}
+  .chip{display:inline-block;font-size:12.5px;padding:3px 10px;border:1px solid var(--ism-color-border);border-radius:999px;background:var(--ism-color-background);font-variation-settings:"wght" 600;white-space:nowrap}
+  .chip.sub{background:var(--ism-color-4);border-color:transparent;color:var(--ism-color-foreground)}
+  .chip.acc{background:var(--ism-color-accent);border-color:transparent;color:var(--ism-color-background)}
+
+  /* 타일(분야) */
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--ism-gutter)}
+  @media(max-width:860px){.tiles{grid-template-columns:repeat(2,1fr)}}
+  .tile{position:relative;background:var(--ism-color-background);border:1px solid var(--ism-color-border);border-radius:6px;padding:18px 16px;font-family:var(--display);font-size:16.5px;line-height:1.3;letter-spacing:-.01em;font-variation-settings:"wght" 520;cursor:pointer;min-height:86px;display:flex;flex-direction:column;justify-content:flex-end}
+  .tile .idx{position:absolute;top:12px;left:14px;font-family:var(--display);font-size:12px;color:var(--ism-color-muted);font-variation-settings:"wght" 500;letter-spacing:.06em}
+  .tile:hover{font-variation-settings:"wght" 840;border-color:var(--ism-color-foreground)}
+  .tile.on{background:var(--ism-color-accent);border-color:var(--ism-color-accent);color:var(--ism-color-background);font-variation-settings:"wght" 820}
+  .tile.on .idx{color:rgba(243,246,241,.7)}
+  .tile input{position:absolute;opacity:0;width:0;height:0;margin:0}
+
+  /* 폼 */
+  label{display:block;font-size:13.5px;font-variation-settings:"wght" 680;color:#3a3d3b;margin:0 0 6px}
+  .req::after{content:" *";color:var(--warn)} .opt::after{content:" (선택)";color:var(--ism-color-muted);font-variation-settings:"wght" 450;font-size:12px}
+  input,textarea,select{font-family:inherit;font-size:15.5px;width:100%;padding:12px 14px;border:1px solid var(--ism-color-border);border-radius:4px;background:var(--ism-color-background);color:var(--ism-color-foreground);outline:none;transition:border-color var(--ism-motion-duration) var(--ism-motion-easing),box-shadow var(--ism-motion-duration) var(--ism-motion-easing)}
+  input:focus,textarea:focus{border-color:var(--ism-color-accent);box-shadow:0 0 0 2px var(--ism-color-4)}
+  textarea{resize:vertical;min-height:110px;line-height:1.6}
+  .f{margin-bottom:20px} .help{font-size:12.5px;color:var(--ism-color-muted);margin:-2px 0 7px;line-height:1.5} .cnt{font-size:11.5px;color:var(--ism-color-muted);text-align:right;margin-top:4px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px} .pill{position:relative} .pill input{position:absolute;opacity:0;width:0;height:0;margin:0}
+  .pill span{display:inline-block;padding:9px 16px;border:1px solid var(--ism-color-border);border-radius:999px;font-size:14.5px;font-variation-settings:"wght" 560;background:var(--ism-color-background);cursor:pointer;transition:font-variation-settings var(--ism-motion-duration) var(--ism-motion-easing),background-color var(--ism-motion-duration) var(--ism-motion-easing)}
+  .pill:hover span{font-variation-settings:"wght" 800;border-color:var(--ism-color-foreground)}
+  .pill input:checked+span{background:var(--ism-color-foreground);border-color:var(--ism-color-foreground);color:var(--ism-color-background);font-variation-settings:"wght" 760}
+  .chkrow{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--ism-color-border);border-radius:4px;background:var(--ism-color-background);cursor:pointer}
+  .chkrow+.chkrow{margin-top:8px} .chkrow input{width:18px;height:18px;margin:2px 0 0;padding:0;accent-color:var(--ism-color-accent);flex:none}
+  .chkrow b{display:block;font-size:14.5px;font-variation-settings:"wght" 700} .chkrow small{display:block;font-size:12.5px;color:var(--ism-color-muted);line-height:1.5;margin-top:3px}
+  .bad input,.bad textarea{border-color:var(--warn)!important;box-shadow:0 0 0 2px #f3d5d1} .chkrow.bad{border-color:var(--warn)} .bad .pill span,.bad .tile{border-color:var(--warn)}
+  .filebox{border:1px dashed var(--ism-color-border);border-radius:4px;padding:14px;background:var(--ism-color-background);font-size:13.5px} .filebox input{border:none;padding:0;background:none;font-size:13px}
+  .err{background:#f6e3e0;border:1px solid #e3b8b1;color:var(--warn);border-radius:4px;padding:12px 14px;font-size:14px;margin:10px 0;line-height:1.5}
+  .ok{background:#dcebe6;border:1px solid var(--ism-color-4);color:var(--ism-color-accent);border-radius:4px;padding:12px 14px;font-size:14px;margin:10px 0}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px} .spacer{flex:1}
+  .spin{display:inline-block;width:16px;height:16px;border:2px solid var(--ism-color-4);border-top-color:var(--ism-color-accent);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-3px}
+  @keyframes sp{to{transform:rotate(360deg)}} .skeleton{color:var(--ism-color-muted);text-align:center;padding:40px 0}
+  .draft{font-size:12px;color:var(--ism-color-muted);margin-top:8px} .draft a{text-decoration:underline}
+  .secttl{display:flex;align-items:baseline;gap:12px;margin:0 0 6px} .secttl .n{font-family:var(--display);font-size:30px;line-height:1;color:var(--ism-color-accent);font-variation-settings:"wght" 300} .secttl h2{margin:0}
+  .secdesc{font-size:14.5px;color:#3a3d3b;margin:0 0 18px}
+  .info{display:grid;gap:8px;margin:12px 0 0} .info div{display:grid;grid-template-columns:96px 1fr;gap:12px;font-size:14.5px} .info dt{font-variation-settings:"wght" 760;color:var(--ism-color-accent)} .info dd{margin:0}
+
+  /* 공개 목록 */
+  .tabs{display:flex;gap:4px;flex-wrap:wrap;margin:18px 0 6px}
+  .tabs button{padding:8px 14px;border-radius:4px;font-size:14.5px;font-variation-settings:"wght" 500;color:var(--ism-color-muted)}
+  .tabs button:hover{font-variation-settings:"wght" 760;color:var(--ism-color-foreground)} .tabs button.on{color:var(--ism-color-accent);font-variation-settings:"wght" 800;background:var(--ism-color-surface)}
+  .row{display:grid;grid-template-columns:1fr auto;gap:16px;padding:22px 0;border-bottom:1px solid var(--ism-color-border);cursor:pointer;align-items:start}
+  .row:hover h3{font-variation-settings:"wght" 860;color:var(--ism-color-accent)}
+  .row .sum{margin:6px 0 0;font-size:14.5px;color:#3a3d3b;max-width:760px} .row .meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+  .row .date{font-family:var(--display);font-size:13px;color:var(--ism-color-muted);font-variation-settings:"wght" 500;white-space:nowrap;padding-top:4px}
+  .counter{font-family:var(--display);font-size:13px;color:var(--ism-color-muted);font-variation-settings:"wght" 600}
+  .search{max-width:360px}
+
+  /* 모달 */
+  .modal-bg{position:fixed;inset:0;background:rgba(21,22,23,.55);display:grid;place-items:center;z-index:50;padding:16px}
+  .modal{background:var(--ism-color-background);border:1px solid var(--ism-color-border);border-radius:6px;max-width:760px;width:100%;max-height:88vh;overflow:auto;padding:28px}
+  @media(max-width:600px){.modal{padding:20px 16px}}
+  .rv{margin:0} .rv dt{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ism-color-accent);font-variation-settings:"wght" 760;margin-top:16px} .rv dd{margin:4px 0 0;font-size:15px;line-height:1.65;white-space:pre-wrap;word-break:break-word}
+
+  /* 심사·관리자·투표 */
+  .item{background:var(--ism-color-background);border:1px solid var(--ism-color-border);border-radius:6px;padding:20px} .item p{margin:8px 0;font-size:14.5px;line-height:1.6}
+  .kv{font-size:12.5px;color:var(--ism-color-muted);font-variation-settings:"wght" 700;letter-spacing:.04em}
+  .scorebox{margin-top:16px;padding:16px;border:1px solid var(--ism-color-border);border-radius:6px;background:var(--ism-color-surface)}
+  .crit{padding:10px 0;border-top:1px dashed var(--ism-color-border)} .crit:first-of-type{border-top:none;padding-top:2px}
+  .crit-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;margin-bottom:7px;font-size:13.5px} .crit-h b{font-variation-settings:"wght" 760} .crit-h .mx{font-size:12px;color:var(--ism-color-accent);font-variation-settings:"wght" 760} .crit-h .ds{flex-basis:100%;font-size:12px;color:var(--ism-color-muted)}
+  .lv{display:grid;grid-template-columns:repeat(5,1fr);gap:6px} .lvb{position:relative} .lvb input{position:absolute;opacity:0;width:0;height:0;margin:0}
+  .lvb span{display:flex;flex-direction:column;align-items:center;gap:1px;padding:7px 3px;border:1px solid var(--ism-color-border);border-radius:4px;font-size:12px;font-variation-settings:"wght" 640;color:var(--ism-color-muted);background:var(--ism-color-background);cursor:pointer;line-height:1.2;transition:font-variation-settings var(--ism-motion-duration) var(--ism-motion-easing)}
+  .lvb span small{font-size:11px;opacity:.75} .lvb:hover span{font-variation-settings:"wght" 820;border-color:var(--ism-color-foreground)}
+  .lvb input:checked+span{background:var(--ism-color-accent);border-color:var(--ism-color-accent);color:var(--ism-color-background)}
+  @media(max-width:480px){.lvb span{font-size:10.5px;padding:6px 1px}}
+  table{width:100%;border-collapse:collapse;font-size:14px} th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--ism-color-border);vertical-align:top} th{font-size:12px;color:var(--ism-color-muted);white-space:nowrap;font-variation-settings:"wght" 700}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums} tr.fin{background:var(--ism-color-4)} .chk{width:18px;height:18px;accent-color:var(--ism-color-accent);padding:0}
+  .rankcard{display:flex;align-items:center;gap:16px;padding:16px 18px;border:1px solid var(--ism-color-border);border-radius:6px;background:var(--ism-color-background)}
+  .rankcard .no{font-family:var(--display);width:52px;flex:none;font-size:14px;font-variation-settings:"wght" 820;color:var(--ism-color-accent)} .rankcard .score{margin-left:auto;text-align:right} .rankcard .score b{font-family:var(--display);font-size:22px;font-variation-settings:"wght" 800}
+  .cfg3{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px} @media(max-width:700px){.cfg3{grid-template-columns:1fr}}
+  .ballot{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--ism-gutter);margin-top:20px}
+  .vcard{background:var(--ism-color-background);border:1px solid var(--ism-color-border);border-radius:6px;padding:22px;cursor:pointer;position:relative;transition:border-color var(--ism-motion-duration) var(--ism-motion-easing),background-color var(--ism-motion-duration) var(--ism-motion-easing)}
+  .vcard:hover{border-color:var(--ism-color-foreground)} .vcard:hover h3{font-variation-settings:"wght" 860}
+  .vcard.on{border-color:var(--ism-color-accent);box-shadow:0 0 0 2px var(--ism-color-accent) inset} .vcard.on h3{color:var(--ism-color-accent)}
+  .vcard .check{position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:50%;border:1px solid var(--ism-color-border);display:grid;place-items:center;color:transparent;font-size:14px} .vcard.on .check{background:var(--ism-color-accent);border-color:var(--ism-color-accent);color:var(--ism-color-background)}
+  .vcard .one{margin:10px 0 12px;font-size:15px;line-height:1.6;font-variation-settings:"wght" 560} .vcard .nf{margin:8px 0} .vcard .nt{display:block;font-size:13.5px;line-height:1.55;margin-top:2px}
+  .demo{background:#eef2e9;border-bottom:1px solid var(--ism-color-border);color:#55594f;font-size:12.5px;text-align:center;padding:7px 12px}
+  footer{border-top:1px solid var(--ism-color-border);padding:26px 0;color:var(--ism-color-muted);font-size:13px;line-height:1.6}
+</style>
+</head>
+<body>
+<div id="demoBar" class="demo hidden" style="display:none">미리보기 모드 · 내장 데모 데이터로 동작 중 (심사위원 1001 · 관리자 admin1234 · 투표 김서울/850312). <code>CONFIG.GAS_URL</code>을 입력하면 실제 시스템에 연결됩니다.</div>
+<header class="top"><div class="wrap">
+  <div class="brand" onclick="go('')">정책제안<small>서울특별시사회복지사협회</small></div>
+  <nav class="nl" id="nav"><a data-r="apply" onclick="go('apply')">제안하기</a><a data-r="list" onclick="go('list')">공개 목록</a><a data-r="judge" class="dim" onclick="go('judge')">위원</a><a data-r="admin" class="dim" onclick="go('admin')">관리자</a></nav>
+</div></header>
+<main><div class="wrap" id="view"><div class="skeleton"><span class="spin"></span> 불러오는 중…</div></div></main>
+<footer><div class="wrap" id="foot"></div></footer>
+
+<script>
+/* ================= 설정 ================= */
+const CONFIG = {
+  GAS_URL: "여기에_APPS_SCRIPT_웹앱_URL_붙여넣기",
+  SUPABASE_URL: "", SUPABASE_ANON_KEY: "",          // 회원투표 전용(anon 키만)
+  PERIOD: "",                                        // 예: "2026. 11. 2.(월) ~ 11. 30.(월)"  비우면 표시하지 않음
+  CONTACT: "서울특별시사회복지사협회 02-786-2962",
+  SCHEDULE: [],                                      // [["제안 접수","11. 2. ~ 11. 30."],["위원 검토","12. 4."],...] 비우면 숨김
+};
+const DEMO = CONFIG.GAS_URL.indexOf("붙여넣기") >= 0;
+const SUPA = !DEMO && !!(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY);
+const BUSY_MSG = "접속이 많아 처리가 지연되고 있습니다. 잠시 후 다시 시도해 주세요.";
+
+const FIELDS = ["대시민복지정책","처우개선"];
+const FIELD_DESC = {
+  "대시민복지정책":"서울시민의 삶과 직결되는 복지정책·서비스 제안. 돌봄, 1인가구, 아동·노인·장애인, 지역 복지안전망 등 현장에서 본 정책 과제를 제안합니다.",
+  "처우개선":"서울 사회복지사·시설 종사자의 처우와 노동환경을 개선하는 제안. 아래 8개 세부분야 중 하나를 선택합니다.",
+};
+const SUBFIELDS = { "처우개선": ["임금(임금체계 등)","복리후생","경력인정 및 승급","고용 안정","휴가","안전과 인권","일가정양립 등","기타"] };
+const CRITERIA=[
+  {key:"필요성시급성",label:"필요성·시급성",max:15,ladder:[15,12,9,6,3],desc:"현장과 시민의 수요가 크고 시급한 문제인가"},
+  {key:"타당성실현가능성",label:"타당성·실현가능성",max:10,ladder:[10,8,6,4,2],desc:"제도·예산·운영 여건을 고려할 때 실제 추진 가능한가"},
+  {key:"효과성파급력",label:"효과성·파급력",max:10,ladder:[10,8,6,4,2],desc:"시행 시 사회복지사와 시민에게 미치는 효과가 큰가"},
+  {key:"구체성",label:"구체성",max:10,ladder:[10,8,6,4,2],desc:"문제 진단과 개선방안이 구체적이고 명확한가"},
+  {key:"창의성",label:"창의성",max:5,ladder:[5,4,3,2,1],desc:"기존 정책·건의와 차별화된 새로운 관점인가"},
+];
+const LEVELS=["매우우수","우수","보통","미흡","매우미흡"];
+
+const APPLICANT=[["성명","input",true,"",""],["소속기관","input",false,"소속이 없어도 제안할 수 있습니다",""],["직위","input",false,"예: 사회복지사, 팀장",""],["휴대전화","tel",true,"010-0000-0000",""],["이메일","email",true,"example@email.com",""]];
+const PROPOSAL=[
+  ["제안명","input",true,"","제안하는 정책·제도의 이름을 적어주세요."],
+  ["제안분야","field",true,"",""],
+  ["세부분야","subfield",false,"",""],
+  ["한줄요약","short",true,"","1~2문장으로 요약해 주세요. 공개 목록과 회원투표 소개자료로 쓰입니다."],
+  ["현황및문제점","textarea",true,"","현재 어떤 상황이고 무엇이 문제인가요? 가능하면 수치·사례를 함께 적어주세요."],
+  ["제안내용","textarea",true,"","무엇을 어떻게 바꾸자는 제안인가요? 추진 주체·방법·단계를 구체적으로 적어주세요."],
+  ["기대효과","textarea",true,"","시행되면 사회복지사와 시민에게 어떤 변화가 생기나요?"],
+  ["근거자료","textarea",false,"","참고한 통계·법령·사례·보고서 등이 있으면 적어주세요."],
+  ["첨부파일","file",false,"","관련 자료가 있으면 첨부해 주세요(5MB 이하)."],
+];
+const CONSENTS=[
+  ["제안공개동의","제안 공개 동의","제안명·분야·한 줄 요약·현황 및 문제점·제안 내용·기대효과가 공개 목록에 게시됩니다. 성명·소속·연락처 등 제안자 정보는 공개되지 않습니다."],
+  ["개인정보동의","개인정보 수집·이용 동의","접수 확인, 검토, 결과 안내를 위해 성명·소속기관·직위·휴대전화번호·이메일을 수집·이용하며, 결과 안내 완료 후 지체 없이 파기합니다."],
+];
+const LABEL={성명:"성명",소속기관:"소속기관",직위:"직위",휴대전화:"휴대전화번호",이메일:"이메일",회원여부:"협회 회원 여부",제안명:"제안명",제안분야:"제안분야",세부분야:"세부분야",한줄요약:"한 줄 요약",현황및문제점:"현황 및 문제점",제안내용:"제안 내용",기대효과:"기대효과",근거자료:"근거·참고자료",첨부파일:"첨부파일"};
+
+/* ================= 통신 ================= */
+const SB_HEADERS=()=>({"apikey":CONFIG.SUPABASE_ANON_KEY,"Authorization":"Bearer "+CONFIG.SUPABASE_ANON_KEY,"Content-Type":"application/json"});
+async function sbGet(path){ const r=await fetch(CONFIG.SUPABASE_URL.replace(/\/$/,"")+"/rest/v1/"+path,{headers:SB_HEADERS()}); if(!r.ok) throw new Error("Supabase "+r.status); return r.json(); }
+async function sbRpc(fn,params){ try{ const r=await fetch(CONFIG.SUPABASE_URL.replace(/\/$/,"")+"/rest/v1/rpc/"+fn,{method:"POST",headers:SB_HEADERS(),body:JSON.stringify(params)}); const d=await r.json().catch(()=>null); if(!r.ok) return {ok:false,error:(d&&d.message)||("요청 실패 "+r.status)}; return d||{ok:false,error:"응답이 없습니다."}; }catch(e){ return {ok:false,error:"네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."}; } }
+async function gasCall(doFetch){ let last; for(let i=0;i<3;i++){ try{ const r=await doFetch(); const t=await r.text(); try{ return JSON.parse(t); }catch(e){ last=e; } }catch(e){ last=e; } await new Promise(res=>setTimeout(res,700*(i+1)+Math.random()*500)); } return {ok:false,error:BUSY_MSG,_busy:true}; }
+async function apiGet(action){ if(DEMO) return mockApi(action,{}); return gasCall(()=>fetch(CONFIG.GAS_URL+"?action="+encodeURIComponent(action))); }
+async function apiPost(payload){ if(DEMO) return mockApi(payload.action,payload); return gasCall(()=>fetch(CONFIG.GAS_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)})); }
+async function loadConfig(){
+  if(SUPA){ try{ const rows=await sbGet("pp_settings?id=eq.1&select=stage,event_name,finalist_count,vote_picks,require_member"); if(rows&&rows[0]) return {단계:rows[0].stage||"신청",행사명:rows[0].event_name||"정책제안",본선개수:rows[0].finalist_count||5,투표선택수:rows[0].vote_picks||2,투표자격:rows[0].require_member===false?"누구나":"회원명단"}; }catch(e){} }
+  const r=await apiGet("config"); if(!r.ok) throw new Error(r.error||"config"); return r.config;
+}
+const $=(s,el=document)=>el.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const nl=s=>esc(s).replace(/\n/g,"<br>");
+let STATE={config:null,judge:null,admin:null,member:null,list:null};
+
+/* ================= 라우팅 · 스크롤 축 모핑 ================= */
+function go(route){ location.hash=route?"#"+route:"#"; window.scrollTo(0,0); }
+window.addEventListener("hashchange",render);
+window.addEventListener("DOMContentLoaded",()=>{ if(DEMO) $("#demoBar").style.display="block"; $("#foot").textContent=CONFIG.CONTACT; render(); });
+// Scroll: axis morph — 스크롤 진행도에 따라 제목·글리프의 wght 축이 서서히 변함(rAF, 축만 변경)
+let morphTick=false;
+window.addEventListener("scroll",()=>{ if(morphTick) return; morphTick=true; requestAnimationFrame(()=>{ morphTick=false; const p=Math.min(1,window.scrollY/420); document.querySelectorAll(".morph").forEach(el=>{ const a=+el.dataset.from||480, b=+el.dataset.to||860; el.style.fontVariationSettings=`"wght" ${Math.round(a+(b-a)*p)}`; }); }); },{passive:true});
+async function render(){
+  const route=location.hash.replace("#",""), view=$("#view");
+  document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.dataset.r===route));
+  try{ if(!STATE.config) STATE.config=await loadConfig(); }
+  catch(e){ view.innerHTML=`<div class="card"><div class="err">${esc(BUSY_MSG)}</div><button class="btn ghost sm" onclick="STATE.config=null;render()">다시 시도</button></div>`; return; }
+  if(route==="apply") return viewApply(view);
+  if(route==="list") return viewList(view);
+  if(route==="vote") return viewVote(view);
+  if(route==="judge") return viewJudge(view);
+  if(route==="admin") return viewAdmin(view);
+  return viewHome(view);
+}
+function steps(cur){
+  const ss=["신청","심사","투표","종료"], lb={"신청":"제안 접수","심사":"위원 검토","투표":"회원 투표","종료":"결과 발표"}, idx=ss.indexOf(cur);
+  return `<div class="steps">${ss.map((s,i)=>`<div class="step ${i<idx?"done":""} ${i===idx?"active":""}"><div class="n">0${i+1}</div><div class="t">${lb[s]}</div></div>`).join("")}</div>`;
+}
+const secttl=(n,t)=>`<div class="secttl"><span class="n">${n}</span><h2>${t}</h2></div>`;
+
+/* ================= 홈 ================= */
+function viewHome(view){
+  const c=STATE.config, st=c.단계, N=c.본선개수, K=c.투표선택수||2;
+  const cta = st==="신청" ? `<button class="btn accent" onclick="go('apply')">정책 제안하기 →</button><button class="btn ghost" onclick="go('list')">공개 목록 보기</button>`
+            : st==="투표" ? `<button class="btn accent" onclick="go('vote')">회원 투표 참여하기 →</button><button class="btn ghost" onclick="go('list')">공개 목록 보기</button>`
+            : st==="종료" ? `<button class="btn accent" onclick="go('vote')">최종 결과 보기 →</button><button class="btn ghost" onclick="go('list')">공개 목록 보기</button>`
+            : `<button class="btn ghost" onclick="go('list')">공개 목록 보기</button><span class="badge"><span class="pip"></span>위원 검토가 진행 중입니다</span>`;
+  view.innerHTML=`
+    <section class="hero">
+      <div>
+        <div class="eyebrow">서울특별시사회복지사협회 · ${esc(c.행사명)}</div>
+        <h1 class="morph" data-from="420" data-to="760">현장이 말하면,<br>정책이 <b>움직입니다</b></h1>
+        <p class="lead" style="margin-top:18px">서울 사회복지사 누구나 <b>대시민 복지정책</b>과 <b>처우개선</b> 정책을 제안할 수 있습니다. 접수된 제안은 공개 목록에 게시되고, 위원 검토와 회원투표를 거쳐 협회의 정책건의 과제로 이어집니다.</p>
+        <div class="toolbar" style="margin-top:22px">${cta}</div>
+        ${CONFIG.PERIOD?`<div class="small muted">접수기간 ${esc(CONFIG.PERIOD)}</div>`:""}
+      </div>
+      <div class="glyphbox" title="가변 폰트 축: 마우스를 올리면 굵기가 변합니다"><div class="glyph morph" data-from="280" data-to="820">제</div><div class="axis mono"><span>SUIT Variable</span><span>Weight 100 — 900</span></div></div>
+    </section>
+    ${steps(st)}
+    <section class="stack" style="margin-top:40px">
+      <div><div class="eyebrow">제안분야</div><h2>무엇을 제안할 수 있나요</h2></div>
+      <div class="grid12">
+        ${FIELDS.map(f=>`<div class="card c6"><h3 style="font-variation-settings:'wght' 760">${esc(f)}</h3><p style="margin-top:10px;font-size:14.5px">${esc(FIELD_DESC[f])}</p>
+          ${SUBFIELDS[f]?`<div class="tiles" style="grid-template-columns:repeat(2,1fr);margin-top:14px">${SUBFIELDS[f].map((s,i)=>`<div class="tile" style="min-height:64px;cursor:default" onclick="go('apply')"><span class="idx">0${i+1}</span>${esc(s)}</div>`).join("")}</div>`:""}</div>`).join("")}
+      </div>
+      <div class="small muted">분야는 제안 내용의 구분과 참여 편의를 위한 것이며, 전체 제안을 통합하여 검토합니다.</div>
+    </section>
+    <section class="stack" style="margin-top:44px">
+      <div><div class="eyebrow">절차</div><h2>제안은 이렇게 다뤄집니다</h2></div>
+      <div class="grid12">
+        <div class="card c4"><div class="counter">01</div><h3 style="margin:6px 0 8px">접수와 공개</h3><p class="small">제안서를 제출하면 제안자 정보는 비공개로 두고, 제안 내용만 공개 목록에 게시됩니다.</p></div>
+        <div class="card c4"><div class="counter">02</div><h3 style="margin:6px 0 8px">위원 검토</h3><p class="small">위원별 50점 만점(필요성·시급성 15, 타당성·실현가능성 10, 효과성·파급력 10, 구체성 10, 창의성 5)으로 평가해 평균 상위 ${N}건을 선정합니다.</p></div>
+        <div class="card c4"><div class="counter">03</div><h3 style="margin:6px 0 8px">회원투표와 선정</h3><p class="small">${c.투표자격==="누구나"?"투표 참여자":"회비납부 회원"} 1인당 ${K}건을 선택하고, 위원회 점수와 투표 점수를 5:5로 합산해 최종 제안을 선정합니다. 선정 제안은 협회 정책건의 과제로 검토·추진합니다.</p></div>
+      </div>
+      ${CONFIG.SCHEDULE.length?`<div class="card"><div class="info">${CONFIG.SCHEDULE.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</div></div>`:""}
+    </section>`;
+  window.dispatchEvent(new Event("scroll"));
+}
+
+/* ================= 공개 목록 ================= */
+let LIST_FILTER={field:"",sub:"",q:""};
+async function viewList(view){
+  view.innerHTML=`<div class="skeleton"><span class="spin"></span> 공개 목록을 불러오는 중…</div>`;
+  if(!STATE.list){ const r=await apiGet("list"); if(!r.ok){ view.innerHTML=`<div class="card"><div class="err">${esc(r.error||BUSY_MSG)}</div><button class="btn ghost sm" onclick="viewList($('#view'))">다시 시도</button></div>`; return; } STATE.list=r.items||[]; }
+  renderList(view);
+}
+function renderList(view){
+  const all=STATE.list, f=LIST_FILTER;
+  const items=all.filter(it=>(!f.field||it.제안분야===f.field)&&(!f.sub||it.세부분야===f.sub)&&(!f.q||(it.제안명+" "+it.한줄요약).toLowerCase().includes(f.q.toLowerCase())));
+  view.innerHTML=`<div class="eyebrow">공개 목록</div><h1 class="morph" data-from="440" data-to="760" style="font-size:clamp(30px,4vw,44px)">접수된 <b>정책제안</b></h1>
+    <p class="lead" style="margin-top:12px">제안자 정보는 공개하지 않습니다. 제목을 누르면 현황·제안 내용·기대효과를 볼 수 있습니다.</p>
+    <div class="toolbar" style="margin:18px 0 0;align-items:flex-end">
+      <div class="tabs" style="margin:0">${["",...FIELDS].map(v=>`<button class="${f.field===v?'on':''}" onclick="setFilter('field','${esc(v)}')">${v||"전체"}</button>`).join("")}</div>
+      <span class="spacer"></span><div class="search"><input placeholder="제안명·요약 검색" value="${esc(f.q)}" oninput="LIST_FILTER.q=this.value;renderList($('#view'));this.focus();this.setSelectionRange(this.value.length,this.value.length)"></div>
+    </div>
+    ${f.field==="처우개선"?`<div class="tabs">${["",...SUBFIELDS["처우개선"]].map(v=>`<button class="${f.sub===v?'on':''}" onclick="setFilter('sub','${esc(v)}')">${v||"세부 전체"}</button>`).join("")}</div>`:""}
+    <div class="counter" style="margin:14px 0 2px">${items.length}건 / 전체 ${all.length}건</div>
+    ${items.length?items.map(it=>`<div class="row" onclick="openDetail('${esc(it.신청ID)}')">
+        <div><div class="meta"><span class="chip">${esc(it.제안분야)}</span>${it.세부분야?`<span class="chip sub">${esc(it.세부분야)}</span>`:""}</div><h3>${esc(it.제안명)}</h3><p class="sum">${esc(it.한줄요약)}</p></div>
+        <div class="date">${esc(it.접수일시)}</div></div>`).join(""):`<div class="skeleton">조건에 맞는 제안이 없습니다.</div>`}`;
+  window.dispatchEvent(new Event("scroll"));
+}
+function setFilter(k,v){ LIST_FILTER[k]=v; if(k==="field") LIST_FILTER.sub=""; renderList($("#view")); }
+function openDetail(id){
+  const it=(STATE.list||[]).find(x=>x.신청ID===id); if(!it) return;
+  const bg=document.createElement("div"); bg.className="modal-bg"; bg.id="detailModal"; bg.onclick=e=>{ if(e.target===bg) bg.remove(); };
+  bg.innerHTML=`<div class="modal"><div class="meta" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><span class="chip">${esc(it.제안분야)}</span>${it.세부분야?`<span class="chip sub">${esc(it.세부분야)}</span>`:""}<span class="chip">${esc(it.접수일시)}</span></div>
+    <h2 style="font-size:28px">${esc(it.제안명)}</h2><p class="lead" style="font-size:16px">${esc(it.한줄요약)}</p>
+    <dl class="rv"><dt>현황 및 문제점</dt><dd>${nl(it.현황및문제점)}</dd><dt>제안 내용</dt><dd>${nl(it.제안내용)}</dd><dt>기대효과</dt><dd>${nl(it.기대효과)}</dd></dl>
+    <div style="margin-top:22px"><button class="btn ghost" onclick="document.getElementById('detailModal').remove()">닫기</button></div></div>`;
+  document.body.appendChild(bg);
+}
+
+/* ================= 제안 접수 ================= */
+const DRAFT_KEY="pp_draft_v1"; let PENDING_FILE=null;
+function viewApply(view){
+  const c=STATE.config;
+  if(c.단계!=="신청"){ view.innerHTML=`<div class="card"><h2>지금은 접수 기간이 아닙니다</h2><p class="muted">${CONFIG.PERIOD?"접수기간: "+esc(CONFIG.PERIOD):"접수가 열리면 이곳에서 제안할 수 있습니다."}</p><button class="btn ghost" onclick="go('')">처음으로</button></div>`; return; }
+  const fieldHtml=(k,type,req,ph,help)=>{
+    const lab=`<label class="${req?'req':'opt'}" for="f_${k}">${LABEL[k]||k}</label>`, hp=help?`<div class="help">${help}</div>`:"";
+    if(type==="textarea"||type==="short") return `<div class="f" data-k="${k}">${lab}${hp}<textarea id="f_${k}" placeholder="${ph}" style="${type==='short'?'min-height:70px':''}"></textarea><div class="cnt" id="cnt_${k}">0자</div></div>`;
+    if(type==="field") return `<div class="f" data-k="${k}">${lab}<div class="help">대시민복지정책 또는 처우개선 중 하나를 선택합니다.</div><div class="pills">${FIELDS.map(v=>`<label class="pill"><input type="radio" name="제안분야" value="${esc(v)}" onchange="onFieldChange()"><span>${esc(v)}</span></label>`).join("")}</div></div>`;
+    if(type==="subfield") return `<div class="f" data-k="세부분야" id="subWrap" style="display:none"></div>`;
+    if(type==="file") return `<div class="f" data-k="${k}">${lab}${hp}<div class="filebox"><input type="file" id="f_${k}" accept="image/*,.pdf,.doc,.docx,.hwp,.hwpx,.ppt,.pptx,.xls,.xlsx,.zip"><div class="help" id="fileMsg" style="margin:6px 0 0">선택된 파일 없음</div></div></div>`;
+    const attrs=type==="tel"?'inputmode="tel" type="tel"':type==="email"?'type="email" inputmode="email"':'';
+    return `<div class="f" data-k="${k}">${lab}${hp}<input id="f_${k}" placeholder="${ph}" ${attrs}></div>`;
+  };
+  view.innerHTML=`
+    <div class="eyebrow">제안 접수</div>
+    <h1 class="morph" data-from="440" data-to="760" style="font-size:clamp(30px,4vw,44px)">정책을 <b>제안합니다</b></h1>
+    <p class="lead" style="margin-top:12px">전문적인 정책보고서가 아니어도 괜찮습니다. 현장에서 본 문제와 바꾸고 싶은 방향을 구체적으로 적어주세요. 작성 중인 내용은 이 기기에 자동 임시저장됩니다.</p>
+    <form id="applyForm" onsubmit="return false" class="stack" style="margin-top:28px">
+      <div class="card">${secttl("01","제안자 정보")}<p class="secdesc">제안자 정보는 공개되지 않으며 접수 확인과 결과 안내에만 사용합니다.</p>
+        <div class="grid12">${APPLICANT.map(a=>`<div class="c6">${fieldHtml(...a)}</div>`).join("")}
+          <div class="c6"><div class="f" data-k="회원여부"><label class="opt">협회 회원 여부</label><div class="pills">${["회원","비회원"].map(v=>`<label class="pill"><input type="radio" name="회원여부" value="${v}"><span>${v}</span></label>`).join("")}</div></div></div></div></div>
+      <div class="card">${secttl("02","제안 내용")}<p class="secdesc">제안명·분야·요약·현황·제안 내용·기대효과는 필수입니다.</p>
+        ${PROPOSAL.map(p=>fieldHtml(...p)).join("")}</div>
+      <div class="card">${secttl("03","확인 및 동의")}
+        ${CONSENTS.map(([k,t,d])=>`<label class="chkrow" id="row_${k}"><input type="checkbox" id="c_${k}"><div><b class="req">${t}</b><small>${d}</small></div></label>`).join("")}</div>
+      <div class="card">${secttl("04","제출")}<div id="applyMsg"></div>
+        <p class="help" style="margin:0 0 12px">「입력내용 확인」을 누르면 누락 항목을 알려드리고, 내용을 한 번 더 확인한 뒤 제출합니다.</p>
+        <div class="toolbar" style="margin:0"><button class="btn accent" type="button" onclick="openReview()">입력내용 확인</button><button class="btn ghost" type="button" onclick="go('')">취소</button></div>
+        <div class="draft" id="draftBar"></div></div>
+    </form>`;
+  bindApply(); restoreDraft(); window.dispatchEvent(new Event("scroll"));
+}
+function onFieldChange(keepSub){
+  const r=document.querySelector('input[name="제안분야"]:checked'), w=$("#subWrap"); if(!w) return;
+  if(!r){ w.style.display="none"; w.innerHTML=""; return; }
+  w.style.display="block";
+  if(SUBFIELDS[r.value]){
+    w.innerHTML=`<label class="req">세부분야</label><div class="help">처우개선 제안이 해당하는 세부분야 하나를 선택합니다.</div><div class="tiles">${SUBFIELDS[r.value].map((s,i)=>`<label class="tile ${keepSub===s?'on':''}"><input type="radio" name="세부분야" value="${esc(s)}" ${keepSub===s?'checked':''} onchange="document.querySelectorAll('.tiles .tile').forEach(t=>t.classList.toggle('on',t.querySelector('input').checked))"><span class="idx">0${i+1}</span>${esc(s)}</label>`).join("")}</div>`;
+  } else {
+    w.innerHTML=`<label class="opt" for="f_세부분야">정책 대상·영역</label><div class="help">예: 1인가구, 돌봄, 아동·청소년, 노인, 장애인, 지역 복지안전망 등</div><input id="f_세부분야" placeholder="해당 영역을 적어주세요" value="${esc(keepSub||"")}">`;
+  }
+}
+function bindApply(){
+  const form=$("#applyForm");
+  form.addEventListener("input",e=>{ const t=e.target; if(t.tagName==="TEXTAREA"){ const k=t.id.replace("f_",""); const c=$("#cnt_"+k); if(c) c.textContent=t.value.length+"자"; } const w=t.closest(".f, .chkrow"); if(w) w.classList.remove("bad"); saveDraftDebounced(); });
+  form.addEventListener("change",e=>{ const t=e.target;
+    if(t.type==="file"){ const f=t.files[0], m=$("#fileMsg"); if(!f){ PENDING_FILE=null; m.textContent="선택된 파일 없음"; return; } if(f.size>5*1024*1024){ PENDING_FILE=null; t.value=""; m.innerHTML=`<span style="color:var(--warn)">5MB 이하 파일만 첨부할 수 있습니다.</span>`; return; } PENDING_FILE=f; m.textContent=`${f.name} (${(f.size/1024).toFixed(0)}KB)`; return; }
+    const w=t.closest(".f, .chkrow"); if(w) w.classList.remove("bad"); saveDraftDebounced(); });
+}
+let draftTimer=null; function saveDraftDebounced(){ clearTimeout(draftTimer); draftTimer=setTimeout(saveDraft,500); }
+function collectApply(){
+  const d={}; APPLICANT.forEach(([k])=>d[k]=($("#f_"+k)||{}).value||"");
+  const mb=document.querySelector('input[name="회원여부"]:checked'); d.회원여부=mb?mb.value:"";
+  const fr=document.querySelector('input[name="제안분야"]:checked'); d.제안분야=fr?fr.value:"";
+  if(d.제안분야&&SUBFIELDS[d.제안분야]){ const sr=document.querySelector('input[name="세부분야"]:checked'); d.세부분야=sr?sr.value:""; } else d.세부분야=($("#f_세부분야")||{}).value||"";
+  PROPOSAL.forEach(([k,type])=>{ if(["field","subfield","file"].includes(type)) return; d[k]=($("#f_"+k)||{}).value||""; });
+  CONSENTS.forEach(([k])=>d[k]=$("#c_"+k)?.checked?"Y":""); return d;
+}
+function saveDraft(){ try{ const d=collectApply(); d._ts=Date.now(); localStorage.setItem(DRAFT_KEY,JSON.stringify(d)); showDraftBar(d._ts); }catch(e){} }
+function restoreDraft(){
+  try{ const raw=localStorage.getItem(DRAFT_KEY); if(!raw){ showDraftBar(null); return; } const d=JSON.parse(raw);
+    if(d.제안분야){ const r=document.querySelector(`input[name="제안분야"][value="${CSS.escape(d.제안분야)}"]`); if(r){ r.checked=true; onFieldChange(d.세부분야||""); } }
+    if(d.회원여부){ const r=document.querySelector(`input[name="회원여부"][value="${CSS.escape(d.회원여부)}"]`); if(r) r.checked=true; }
+    Object.keys(d).forEach(k=>{ if(["_ts","제안분야","세부분야","회원여부"].includes(k)) return; const cb=$("#c_"+k); if(cb){ cb.checked=d[k]==="Y"; return; } const el=$("#f_"+k); if(el&&el.type!=="file"){ el.value=d[k]; const c=$("#cnt_"+k); if(c) c.textContent=(d[k]||"").length+"자"; } });
+    showDraftBar(d._ts);
+  }catch(e){}
+}
+function showDraftBar(ts){ const b=$("#draftBar"); if(!b) return; b.innerHTML=ts?`임시저장됨 · ${new Date(ts).toLocaleString("ko-KR",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"})} <a onclick="clearDraft()">임시저장 삭제</a>`:`작성 중인 내용은 이 기기에 자동 임시저장됩니다.`; }
+function clearDraft(){ if(!confirm("임시저장된 내용을 삭제하고 입력칸을 비울까요?")) return; localStorage.removeItem(DRAFT_KEY); viewApply($("#view")); }
+function validateApply(d){
+  const miss=[], mark=k=>{ const w=document.querySelector(`.f[data-k="${k}"]`)||$("#row_"+k); if(w) w.classList.add("bad"); miss.push(LABEL[k]||k); };
+  APPLICANT.forEach(([k,,req])=>{ if(req&&!d[k].trim()) mark(k); });
+  PROPOSAL.forEach(([k,type,req])=>{ if(type==="field"&&!d.제안분야) mark("제안분야"); else if(type==="subfield"){ if(d.제안분야&&SUBFIELDS[d.제안분야]&&!d.세부분야) mark("세부분야"); } else if(req&&type!=="file"&&!String(d[k]).trim()) mark(k); });
+  CONSENTS.forEach(([k,t])=>{ if(d[k]!=="Y"){ const w=$("#row_"+k); if(w) w.classList.add("bad"); miss.push(t); } });
+  return miss;
+}
+function openReview(){
+  const d=collectApply(); document.querySelectorAll(".bad").forEach(e=>e.classList.remove("bad"));
+  const miss=validateApply(d), m=$("#applyMsg");
+  if(miss.length){ m.innerHTML=`<div class="err"><b>다음 필수항목을 확인해 주세요.</b><br>${miss.map(esc).join(" · ")}</div>`; const first=document.querySelector(".bad"); if(first) first.scrollIntoView({behavior:"smooth",block:"center"}); return; }
+  m.innerHTML="";
+  const rows=[["제안자",`${d.성명}${d.소속기관?" · "+d.소속기관:""}${d.직위?" · "+d.직위:""}${d.회원여부?" · "+d.회원여부:""}`],["연락처",`${d.휴대전화} · ${d.이메일}`],["제안명",d.제안명],["분야",d.제안분야+(d.세부분야?" / "+d.세부분야:"")],["한 줄 요약",d.한줄요약],["현황 및 문제점",d.현황및문제점],["제안 내용",d.제안내용],["기대효과",d.기대효과],["근거·참고자료",d.근거자료||"-"],["첨부파일",PENDING_FILE?PENDING_FILE.name:"(없음)"]];
+  const bg=document.createElement("div"); bg.className="modal-bg"; bg.id="reviewModal";
+  bg.innerHTML=`<div class="modal"><div class="eyebrow">제출 전 확인</div><h2 style="font-size:26px">입력내용을 확인해 주세요</h2><p class="help">수정이 필요하면 「수정하기」로 돌아갈 수 있습니다.</p>
+    <dl class="rv">${rows.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${v?nl(v):"-"}</dd>`).join("")}</dl><div id="submitMsg"></div>
+    <div class="toolbar" style="margin:22px 0 0"><button class="btn accent" id="submitBtn" onclick="submitApply()">제출하기</button><button class="btn ghost" onclick="closeReview()">수정하기</button></div></div>`;
+  document.body.appendChild(bg);
+}
+function closeReview(){ const m=$("#reviewModal"); if(m) m.remove(); }
+function readFileB64(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result.split(",")[1]); r.onerror=rej; r.readAsDataURL(file); }); }
+async function submitApply(){
+  const d=collectApply(), btn=$("#submitBtn"); btn.disabled=true; btn.innerHTML='<span class="spin"></span> 제출 중';
+  const payload={action:"submitApplication",...d};
+  if(PENDING_FILE){ try{ payload.file={name:PENDING_FILE.name,mime:PENDING_FILE.type,data:await readFileB64(PENDING_FILE)}; }catch(e){} }
+  const r=await apiPost(payload);
+  if(r.ok){ localStorage.removeItem(DRAFT_KEY); PENDING_FILE=null; STATE.list=null; closeReview();
+    $("#view").innerHTML=`<div class="card" style="text-align:center;padding:56px 24px"><span class="badge"><span class="pip"></span>접수 완료</span><h1 style="margin-top:18px;font-size:clamp(30px,4vw,44px)">제안이 <b>접수되었습니다</b></h1>
+      <dl class="info" style="max-width:420px;margin:20px auto 24px;text-align:left"><div><dt>접수번호</dt><dd><b>${esc(r.id)}</b></dd></div><div><dt>제안명</dt><dd>${esc(r.제안명||d.제안명)}</dd></div><div><dt>접수일시</dt><dd>${esc(r.접수일시||new Date().toLocaleString("ko-KR"))}</dd></div></dl>
+      <p class="muted small">제안 내용은 공개 목록에 게시되며 제안자 정보는 공개되지 않습니다.</p><div class="toolbar" style="justify-content:center"><button class="btn accent" onclick="go('list')">공개 목록 보기</button><button class="btn ghost" onclick="go('')">처음으로</button></div></div>`; window.scrollTo(0,0); }
+  else{ btn.disabled=false; btn.textContent="제출하기"; $("#submitMsg").innerHTML=`<div class="err">${esc(r.error||"제출에 실패했습니다.")}</div>`; }
+}
+
+/* ================= 위원 검토 ================= */
+function viewJudge(view){
+  if(STATE.judge) return renderJudgeList(view);
+  view.innerHTML=`<div class="eyebrow">위원 검토</div><h1 style="font-size:clamp(30px,4vw,44px)">위원 <b>로그인</b></h1><p class="lead" style="margin-top:12px">배정받은 코드를 입력하세요. 제안마다 5개 항목을 5단계로 평가합니다(50점 만점).</p>
+    <div class="card" style="max-width:440px;margin-top:22px"><div id="jMsg"></div><label class="req">위원 코드</label><input id="jcode" placeholder="예: 1001" onkeydown="if(event.key==='Enter')judgeLogin()"><button class="btn accent block" style="margin-top:16px" id="jbtn" onclick="judgeLogin()">로그인</button></div>`;
+}
+async function judgeLogin(){ const code=$("#jcode").value.trim(), btn=$("#jbtn"); btn.disabled=true; btn.innerHTML='<span class="spin"></span>'; const r=await apiPost({action:"judgeLogin",code}); btn.disabled=false; btn.textContent="로그인"; if(r.ok){ STATE.judge=r; renderJudgeList($("#view")); } else $("#jMsg").innerHTML=`<div class="err">${esc(r.error)}</div>`; }
+function renderJudgeList(view){
+  const j=STATE.judge, scored=j.items.filter(i=>i.내점수&&i.내점수.합계!=null).length;
+  view.innerHTML=`<div class="toolbar"><div><div class="eyebrow">위원 검토</div><h2 style="margin:0">${esc(j.심사위원명)} 위원</h2></div><span class="spacer"></span><span class="badge" id="jprog"><span class="pip"></span>${scored} / ${j.items.length} 채점 완료</span><button class="btn ghost sm" onclick="STATE.judge=null;render()">로그아웃</button></div>
+    <p class="lead" style="margin-bottom:20px;font-size:16px">5개 항목을 모두 선택하면 자동 저장되며 언제든 수정할 수 있습니다. 「출력용 보기」로 제안서를 인쇄·PDF 저장할 수 있습니다.</p>
+    <div class="stack">${j.items.map((it,idx)=>judgeCard(it,idx)).join("")}</div>`;
+}
+function judgeCard(it,idx){
+  const sec=(l,v)=>v?`<p><span class="kv">${l}</span><br>${nl(v)}</p>`:"", my=it.내점수||{};
+  return `<div class="item" id="jc_${idx}"><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span class="chip">${esc(it.제안분야)}</span>${it.세부분야?`<span class="chip sub">${esc(it.세부분야)}</span>`:""}<span class="chip">${esc(it.신청ID)}</span></div>
+    <h3>${esc(it.제안명)}</h3><div class="small muted" style="margin:4px 0 8px">${esc(it.성명)}${it.소속기관?` · ${esc(it.소속기관)}`:""}${it.직위?` · ${esc(it.직위)}`:""}${it.회원여부?` · ${esc(it.회원여부)}`:""}</div>
+    <p style="font-variation-settings:'wght' 600">${nl(it.한줄요약)}</p>
+    ${sec("현황 및 문제점",it.현황및문제점)}${sec("제안 내용",it.제안내용)}${sec("기대효과",it.기대효과)}${sec("근거·참고자료",it.근거자료)}
+    ${it.첨부파일?`<p><span class="kv">첨부파일</span><br><a href="${esc(it.첨부파일)}" target="_blank">첨부파일 열기 ↗</a></p>`:""}
+    <button class="btn ghost sm" type="button" onclick="printProposal(${idx})">출력용 보기</button>
+    <div class="scorebox"><div class="toolbar" style="margin:0 0 6px"><b style="font-variation-settings:'wght' 760">검토 채점</b><span class="spacer"></span><span class="badge" id="tot_${idx}">${my.합계!=null?`합계 ${my.합계} / 50`:"미채점"}</span></div>
+      ${CRITERIA.map(c=>`<div class="crit"><div class="crit-h"><b>${c.label}</b><span class="mx">${c.max}점</span><span class="ds">${c.desc}</span></div>
+        <div class="lv">${c.ladder.map((pt,li)=>`<label class="lvb"><input type="radio" name="s_${idx}_${c.key}" value="${pt}" ${Number(my[c.key])===pt?'checked':''} onchange="onScoreChange('${esc(it.신청ID)}',${idx})"><span>${LEVELS[li]}<small>${pt}점</small></span></label>`).join("")}</div></div>`).join("")}
+      <div class="help" id="scmsg_${idx}" style="margin:8px 0 0">&nbsp;</div></div></div>`;
+}
+function collectScores(idx){ const sc={}; let total=0, done=true; CRITERIA.forEach(c=>{ const r=document.querySelector(`input[name="s_${idx}_${c.key}"]:checked`); if(r){ sc[c.key]=Number(r.value); total+=Number(r.value);} else done=false; }); return {sc,total,done}; }
+async function onScoreChange(appId,idx){
+  const {sc,total,done}=collectScores(idx), tot=$("#tot_"+idx), msg=$("#scmsg_"+idx);
+  tot.textContent=done?`합계 ${total} / 50`:`합계 ${total} / 50 · ${CRITERIA.length-Object.keys(sc).length}개 항목 남음`;
+  if(!done){ msg.innerHTML='<span class="muted">5개 항목을 모두 선택하면 저장됩니다.</span>'; return; }
+  msg.innerHTML='<span class="spin"></span> 저장 중';
+  const r=await apiPost({action:"saveScore",judge:STATE.judge.심사위원명,appId,scores:sc});
+  if(r.ok){ msg.innerHTML='<span style="color:var(--ism-color-accent);font-variation-settings:\'wght\' 700">✓ 저장됨</span>'; STATE.judge.items[idx].내점수=Object.assign({},sc,{합계:total}); const n=STATE.judge.items.filter(i=>i.내점수&&i.내점수.합계!=null).length; const b=$("#jprog"); if(b) b.innerHTML=`<span class="pip"></span>${n} / ${STATE.judge.items.length} 채점 완료`; }
+  else msg.innerHTML=`<span style="color:var(--warn)">${esc(r.error)}</span>`;
+}
+function printProposal(idx){
+  const it=STATE.judge.items[idx];
+  const rows=[["제안분야",it.제안분야+(it.세부분야?" / "+it.세부분야:"")],["한 줄 요약",it.한줄요약],["제안자",`${it.성명||""}${it.소속기관?" · "+it.소속기관:""}${it.직위?" · "+it.직위:""}`],["현황 및 문제점",it.현황및문제점],["제안 내용",it.제안내용],["기대효과",it.기대효과],["근거·참고자료",it.근거자료],["첨부파일",it.첨부파일]];
+  const w=window.open("","_blank");
+  w.document.write(`<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><title>${esc(it.제안명)}</title><style>body{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;max-width:800px;margin:30px auto;padding:0 20px;color:#111}.top{font-size:12px;color:#666}h1{font-size:22px;margin:4px 0 2px}.sub{color:#666;font-size:13px;margin-bottom:18px}table{width:100%;border-collapse:collapse}th,td{border:1px solid #bbb;padding:10px 12px;vertical-align:top;font-size:13.5px;line-height:1.65}th{width:150px;background:#f3f5f4;text-align:left}@media print{body{margin:0}}</style></head><body><div class="top">서울특별시사회복지사협회 · 정책제안서</div><h1>${esc(it.제안명)}</h1><div class="sub">접수번호 ${esc(it.신청ID)}</div><table>${rows.map(([k,v])=>`<tr><th>${k}</th><td>${v?nl(v):"-"}</td></tr>`).join("")}</table><script>window.onload=function(){window.print();}<\/script></body></html>`);
+  w.document.close();
+}
+
+/* ================= 관리자 ================= */
+let ADMIN_PW="";
+function viewAdmin(view){
+  if(STATE.admin) return renderAdmin(view);
+  view.innerHTML=`<div class="eyebrow">관리자</div><h1 style="font-size:clamp(30px,4vw,44px)">관리자 <b>로그인</b></h1><div class="card" style="max-width:440px;margin-top:22px"><div id="aMsg"></div><label class="req">관리자 비밀번호</label><input id="apw" type="password" onkeydown="if(event.key==='Enter')adminLogin()"><button class="btn accent block" style="margin-top:16px" id="abtn" onclick="adminLogin()">로그인</button></div>`;
+}
+async function adminLogin(){ ADMIN_PW=$("#apw").value; const btn=$("#abtn"); btn.disabled=true; btn.innerHTML='<span class="spin"></span>'; const r=await apiPost({action:"adminData",password:ADMIN_PW}); btn.disabled=false; btn.textContent="로그인"; if(r.ok){ STATE.admin=r; renderAdmin($("#view")); } else $("#aMsg").innerHTML=`<div class="err">${esc(r.error||"로그인 실패")}</div>`; }
+async function reloadAdmin(){ const r=await apiPost({action:"adminData",password:ADMIN_PW}); if(r.ok){ STATE.admin=r; renderAdmin($("#view")); } }
+function renderAdmin(view){
+  const d=STATE.admin, c=d.config, N=c.본선개수, K=c.투표선택수||2, stages=["신청","심사","투표","종료"];
+  view.innerHTML=`<div class="toolbar"><div><div class="eyebrow">관리자</div><h2 style="margin:0">${esc(c.행사명)}</h2></div><span class="spacer"></span><button class="btn ghost sm" onclick="exportExcel()">엑셀 다운로드</button><button class="btn ghost sm" onclick="reloadAdmin()">새로고침</button><button class="btn ghost sm" onclick="STATE.admin=null;render()">로그아웃</button></div>
+    <div class="stack">
+    <div class="card"><h3>단계 관리</h3>${steps(c.단계)}
+      <div class="toolbar" style="margin:0">${stages.map(s=>`<button class="btn ${s===c.단계?'accent':'ghost'} sm" onclick="setStage('${s}')">${{"신청":"제안 접수","심사":"위원 검토","투표":"투표 개시","종료":"결과 발표"}[s]}</button>`).join("")}</div><div id="stageMsg"></div>
+      <hr class="hr"><b style="font-variation-settings:'wght' 760">기본 설정</b> <span class="help" style="display:inline;margin:0">('설정' 시트 값 · 화면 전체 반영)</span>
+      <div class="cfg3" style="margin-top:10px"><div><label>행사명</label><input id="cfg_name" value="${esc(c.행사명)}"></div><div><label>위원 검토 선정 건수</label><input id="cfg_n" type="number" min="1" value="${N}"></div><div><label>1인 투표 선택 건수</label><input id="cfg_k" type="number" min="1" value="${K}"></div>
+        <div><label>투표 자격</label><select id="cfg_q"><option value="회원명단" ${c.투표자격!=="누구나"?"selected":""}>회비납부 회원(명단 대조)</option><option value="누구나" ${c.투표자격==="누구나"?"selected":""}>누구나(중복만 차단)</option></select></div></div>
+      <div class="toolbar" style="margin:10px 0 0"><button class="btn sm" onclick="saveConfig()">설정 저장</button><span class="help" id="cfgMsg" style="margin:0"></span></div>
+      <hr class="hr"><div class="toolbar" style="margin:0 0 6px"><b style="font-variation-settings:'wght' 760">회원투표 서버 (Supabase)</b><span class="badge">${d.supabase?'연동됨 · 투표는 Supabase가 처리':'미연동 · 투표도 Apps Script가 처리(동시접속 취약)'}</span></div>
+      <p class="help" style="margin:0 0 10px">본선 ${d.finalists.length}건 · 회원명단 ${d.memberCount}명. 「투표 개시」 시 자동 동기화, 명단 수정 후에는 수동 동기화.</p>
+      <div class="toolbar" style="margin:0"><button class="btn ghost sm" onclick="syncSupabase()" ${d.supabase?'':'disabled'}>Supabase 동기화</button><button class="btn ghost sm" onclick="importVotes()" ${d.supabase?'':'disabled'}>투표 기록 시트로 가져오기</button><span class="help" id="syncMsg" style="margin:0"></span></div></div>
+    <div class="card"><div class="toolbar" style="margin-bottom:6px"><h3>위원 검토 집계 · 상위 ${N}건 확정</h3><span class="spacer"></span><span class="badge">위원 ${d.judgeCount}명 · 제안 ${d.applications.length}건</span></div>
+      <p class="help">위원회 점수(평균/50) 내림차순. 체크박스로 상위 ${N}건을 선택한 뒤 확정하세요. 「공개」를 끄면 공개 목록에서 숨겨집니다(부적절한 제안 등).</p>
+      <div style="overflow:auto;margin-top:12px"><table><thead><tr><th style="width:34px">본선</th><th style="width:34px">공개</th><th>제안명</th><th>분야</th><th>제안자</th><th class="num">채점</th>${(d.criteria||CRITERIA).map(c=>`<th class="num">${esc((CRITERIA.find(x=>x.key===c.key)||{}).label||c.key)}<br><span class="muted">/${c.max}</span></th>`).join("")}<th class="num">위원회<br>점수/50</th></tr></thead><tbody>
+        ${d.applications.map(a=>`<tr class="${a.본선?'fin':''}"><td><input type="checkbox" class="chk fchk" value="${esc(a.신청ID)}" ${a.본선?'checked':''}></td><td><input type="checkbox" class="chk" ${a.공개?'checked':''} onchange="toggleVisible('${esc(a.신청ID)}',this.checked)"></td>
+          <td><b style="font-variation-settings:'wght' 700">${esc(a.제안명)}</b></td><td><span class="chip">${esc(a.제안분야)}</span>${a.세부분야?`<br><span class="chip sub" style="margin-top:4px">${esc(a.세부분야)}</span>`:""}</td><td>${esc(a.성명)}<div class="help" style="margin:0">${esc(a.소속기관||"")}${a.회원여부?` · ${esc(a.회원여부)}`:""}</div></td>
+          <td class="num">${a.채점수}</td>${(d.criteria||CRITERIA).map(c=>`<td class="num muted">${a.항목평균?a.항목평균[c.key]:""}</td>`).join("")}<td class="num"><b>${a.평균}</b></td></tr>`).join("")}</tbody></table></div>
+      <div class="toolbar" style="margin:16px 0 0"><button class="btn sm" onclick="confirmFinalists(${N})">선택한 항목 본선 확정</button><span class="help" id="finMsg" style="margin:0">현재 본선 ${d.finalists.length}건 확정됨</span></div></div>
+    <div class="card"><div class="toolbar" style="margin-bottom:6px"><h3>최종 결과 (위원회 50 + 회원투표 50)</h3><span class="spacer"></span><span class="badge">유효 투표자 ${d.voters||0}명 · 총 ${d.voteTotal}표</span></div>
+      <p class="help">위원회 점수 = 위원별 점수 합계 ÷ 위원 수 · 투표 점수 = 득표수 ÷ 유효 투표자 수 × 50</p>${renderResultsBlock(d.results)}</div></div>`;
+}
+function renderResultsBlock(res){
+  if(!res||!res.length) return `<p class="muted" style="margin-top:10px">본선을 확정하면 결과가 계산됩니다.</p>`;
+  return `<div class="stack" style="margin:14px 0 20px">${res.filter(r=>r.시상).map(r=>`<div class="rankcard"><div class="no">${esc(r.시상)}</div><div><span class="chip">${esc(r.제안분야)}</span> <b style="font-variation-settings:'wght' 720">${esc(r.제안명)}</b></div><div class="score"><b>${r.최종점수}</b><div class="help" style="margin:0">위원회 ${r.위원회점수} + 투표 ${r.투표점수}</div></div></div>`).join("")}</div>
+    <div style="overflow:auto"><table><thead><tr><th class="num">순위</th><th>제안명</th><th class="num">위원회/50</th><th class="num">득표수</th><th class="num">득표율</th><th class="num">투표/50</th><th class="num">최종</th><th>구분</th></tr></thead><tbody>${res.map(r=>`<tr class="${r.시상?'fin':''}"><td class="num">${r.순위}</td><td>${esc(r.제안명)}</td><td class="num">${r.위원회점수}</td><td class="num">${r.득표수}</td><td class="num">${r.득표율}%</td><td class="num">${r.투표점수}</td><td class="num"><b>${r.최종점수}</b></td><td>${esc(r.시상||"")}</td></tr>`).join("")}</tbody></table></div>`;
+}
+async function setStage(stage){ const m=$("#stageMsg"); m.innerHTML='<div class="help"><span class="spin"></span> 단계 전환 중…</div>'; const r=await apiPost({action:"setStage",password:ADMIN_PW,stage}); if(r.ok){ STATE.config=null; STATE.list=null; await reloadAdmin(); if(r.note){ const s=$("#syncMsg"); if(s) s.innerHTML=`<span style="color:${/실패/.test(r.note)?'var(--warn)':'var(--ism-color-accent)'}">${esc(r.note)}</span>`; } } else m.innerHTML=`<div class="err">${esc(r.error)}</div>`; }
+async function confirmFinalists(N){ const ids=[...document.querySelectorAll(".fchk:checked")].map(c=>c.value), msg=$("#finMsg"); if(ids.length!==N&&!confirm(`선정 건수(${N}건)와 다릅니다. 선택한 ${ids.length}건으로 확정할까요?`)) return; msg.innerHTML='<span class="spin"></span>'; const r=await apiPost({action:"setFinalists",password:ADMIN_PW,ids}); if(r.ok){ await reloadAdmin(); if(r.note){ const s=$("#syncMsg"); if(s) s.innerHTML=`<span>${esc(r.note)}</span>`; } } else msg.innerHTML=`<span style="color:var(--warn)">${esc(r.error)}</span>`; }
+async function saveConfig(){ const m=$("#cfgMsg"); m.innerHTML='<span class="spin"></span>'; const r=await apiPost({action:"setConfig",password:ADMIN_PW,행사명:$("#cfg_name").value.trim(),본선개수:$("#cfg_n").value,투표선택수:$("#cfg_k").value,투표자격:$("#cfg_q").value}); if(!r.ok){ m.innerHTML=`<span style="color:var(--warn)">${esc(r.error)}</span>`; return; } STATE.config=null; await reloadAdmin(); const s=$("#cfgMsg"); if(s) s.innerHTML=`<span style="color:var(--ism-color-accent)">${esc(r.msg)}</span>`; }
+async function toggleVisible(id,vis){ const r=await apiPost({action:"setVisibility",password:ADMIN_PW,appId:id,visible:vis}); if(!r.ok) alert(r.error||"변경 실패"); STATE.list=null; }
+async function syncSupabase(){ const s=$("#syncMsg"); s.innerHTML='<span class="spin"></span>'; const r=await apiPost({action:"syncSupabase",password:ADMIN_PW}); s.innerHTML=r.ok?`<span style="color:var(--ism-color-accent)">${esc(r.msg)}</span>`:`<span style="color:var(--warn)">${esc(r.error)}</span>`; if(r.ok) setTimeout(reloadAdmin,800); }
+async function importVotes(){ if(!confirm("Supabase의 투표 기록을 '투표' 시트로 가져옵니다(기존 내용 덮어씀). 진행할까요?")) return; const s=$("#syncMsg"); s.innerHTML='<span class="spin"></span>'; const r=await apiPost({action:"importVotes",password:ADMIN_PW}); s.innerHTML=r.ok?`<span style="color:var(--ism-color-accent)">${esc(r.msg)}</span>`:`<span style="color:var(--warn)">${esc(r.error)}</span>`; }
+async function exportExcel(){ const r=await apiPost({action:"exportData",password:ADMIN_PW}); if(!r.ok){ alert(r.error||"다운로드 실패"); return; } if(typeof XLSX==="undefined"){ alert("엑셀 라이브러리를 불러오지 못했습니다."); return; } const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(r.제안내역),"제안내역"); XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(r.심사집계),"심사집계"); if(r.심사상세) XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(r.심사상세),"심사상세"); XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(r.투표집계),"투표집계"); XLSX.writeFile(wb,`정책제안_${new Date().toISOString().slice(0,10)}.xlsx`); }
+
+/* ================= 회원 투표 ================= */
+function viewVote(view){
+  const st=STATE.config.단계;
+  if(st==="종료") return renderFinalPublic(view);
+  if(st!=="투표"){ view.innerHTML=`<div class="card"><h2>투표 기간이 아닙니다</h2><p class="muted">회원 투표가 열리면 이곳에서 참여할 수 있습니다.</p><button class="btn ghost" onclick="go('')">처음으로</button></div>`; return; }
+  if(!STATE.member) return renderVoteAuth(view);
+  return renderBallot(view);
+}
+function renderVoteAuth(view){
+  const anyone=STATE.config.투표자격==="누구나";
+  view.innerHTML=`<div class="eyebrow">회원 투표</div><h1 style="font-size:clamp(30px,4vw,44px)">본인 <b>확인</b></h1><p class="lead" style="margin-top:12px">${anyone?"성함과 생년월일 6자리로 1인 1회 참여를 확인합니다.":"회비납부 회원만 투표할 수 있습니다. 성함과 생년월일 6자리로 확인합니다."}</p>
+    <div class="card" style="max-width:460px;margin-top:22px"><div id="vMsg"></div><div class="f"><label class="req">성함</label><input id="vname" placeholder="홍길동"></div><div class="f"><label class="req">생년월일 6자리</label><input id="vbirth" placeholder="예: 901231" maxlength="6" inputmode="numeric" onkeydown="if(event.key==='Enter')memberVerify()"></div>
+      <button class="btn accent block" id="vbtn" onclick="memberVerify()">확인하고 투표하기</button><p class="help" style="margin:10px 0 0">투표는 1인 1회이며, 입력 정보는 자격 확인 용도로만 사용됩니다.</p></div>`;
+}
+async function memberVerify(){ const name=$("#vname").value.trim(), birth=$("#vbirth").value.replace(/\D/g,""), btn=$("#vbtn"); btn.disabled=true; btn.innerHTML='<span class="spin"></span>'; const r=SUPA?await sbRpc("pp_check_member",{p_name:name,p_birth:birth}):await apiPost({action:"verifyMember",name,birth}); btn.disabled=false; btn.textContent="확인하고 투표하기"; if(r.ok){ STATE.member={name,birth}; renderBallot($("#view")); } else $("#vMsg").innerHTML=`<div class="err">${esc(r.error)}</div>`; }
+let PICKED=new Set();
+async function renderBallot(view){
+  view.innerHTML=`<div class="skeleton"><span class="spin"></span> 후보를 불러오는 중…</div>`;
+  let items=[];
+  if(SUPA){ try{ const rows=await sbGet("pp_finalists?select=app_id,title,field,subfield,summary,problem,content,effect&order=sort_order.asc"); items=rows.map(x=>({신청ID:x.app_id,제안명:x.title,제안분야:x.field,세부분야:x.subfield,한줄요약:x.summary,현황및문제점:x.problem,제안내용:x.content,기대효과:x.effect})); }catch(e){ view.innerHTML=`<div class="card"><div class="err">${esc(BUSY_MSG)}</div></div>`; return; } }
+  else { const r=await apiGet("ballot"); if(!r.ok){ view.innerHTML=`<div class="card"><div class="err">${esc(r.error||BUSY_MSG)}</div></div>`; return; } items=r.items||[]; }
+  const K=STATE.config.투표선택수||2; PICKED=new Set();
+  const nf=(l,v)=>v?`<div class="nf"><span class="kv">${l}</span><span class="nt">${nl(v)}</span></div>`:"";
+  view.innerHTML=`<div class="eyebrow">회원 투표</div><h1 style="font-size:clamp(30px,4vw,44px)">지지하는 제안 <b>${K}건</b>을 골라 주세요</h1>
+    <p class="lead" style="margin-top:12px">위원 검토를 통과한 후보 ${items.length}건 중 서로 다른 ${K}건을 선택합니다(각 1표). 카드를 눌러 선택·해제하고 아래 버튼으로 제출하세요. 제출 후에는 변경할 수 없습니다.</p><div id="vMsg2"></div>
+    <div class="ballot" id="ballot">${items.map(it=>`<div class="vcard" data-id="${esc(it.신청ID)}" onclick="pickVote(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();pickVote(this);}"><div class="check">✓</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><span class="chip">${esc(it.제안분야)}</span>${it.세부분야?`<span class="chip sub">${esc(it.세부분야)}</span>`:""}</div><h3>${esc(it.제안명)}</h3><div class="one">${nl(it.한줄요약)}</div>
+      ${nf("현황 및 문제점",it.현황및문제점)}${nf("제안 내용",it.제안내용)}${nf("기대효과",it.기대효과)}</div>`).join("")}</div>
+    <div style="position:sticky;bottom:calc(16px + env(safe-area-inset-bottom,0px));margin-top:24px"><button class="btn accent block" id="voteBtn" disabled onclick="castVote()">0 / ${K}건 선택됨 — ${K}건을 선택해 주세요</button></div>`;
+}
+function pickVote(el){ const K=STATE.config.투표선택수||2, id=el.dataset.id; if(PICKED.has(id)){ PICKED.delete(id); el.classList.remove("on"); } else { if(PICKED.size>=K) return; PICKED.add(id); el.classList.add("on"); } const b=$("#voteBtn"); b.disabled=PICKED.size!==K; b.textContent=PICKED.size===K?`선택한 ${K}건에 투표하기`:`${PICKED.size} / ${K}건 선택됨 — ${K-PICKED.size}건 더 선택해 주세요`; }
+async function castVote(){
+  const K=STATE.config.투표선택수||2; if(PICKED.size!==K) return;
+  const names=[...PICKED].map(id=>{ const n=document.querySelector(`#ballot .vcard[data-id="${CSS.escape(id)}"] h3`); return n?n.textContent:id; });
+  if(!confirm(`다음 ${K}건에 투표하시겠습니까?\n\n· ${names.join("\n· ")}\n\n제출 후 변경할 수 없습니다.`)) return;
+  const btn=$("#voteBtn"); btn.disabled=true; btn.innerHTML='<span class="spin"></span> 제출 중'; const ids=[...PICKED];
+  const r=SUPA?await sbRpc("pp_cast_vote",{p_name:STATE.member.name,p_birth:STATE.member.birth,p_app_ids:ids}):await apiPost({action:"submitVote",name:STATE.member.name,birth:STATE.member.birth,appIds:ids});
+  if(r.ok){ $("#view").innerHTML=`<div class="card" style="text-align:center;padding:52px 24px"><span class="badge"><span class="pip"></span>투표 완료</span><h1 style="margin-top:18px;font-size:clamp(30px,4vw,44px)">소중한 한 표 <b>감사합니다</b></h1><p class="muted">최종 결과는 협회 안내와 이 페이지에서 확인하실 수 있습니다.</p><button class="btn accent" onclick="STATE.member=null;go('')">처음으로</button></div>`; window.scrollTo(0,0); }
+  else { btn.disabled=false; btn.textContent=`선택한 ${K}건에 투표하기`; $("#vMsg2").innerHTML=`<div class="err">${esc(r.error)}</div>`; window.scrollTo(0,0); }
+}
+async function renderFinalPublic(view){
+  view.innerHTML=`<div class="skeleton"><span class="spin"></span> 결과를 불러오는 중…</div>`;
+  let all=[]; if(SUPA){ try{ const rows=await sbGet("pp_settings?id=eq.1&select=results"); all=(rows&&rows[0]&&rows[0].results)||[]; }catch(e){} } else { const r=await apiGet("results"); all=r.results||[]; }
+  const res=all.filter(x=>x.시상);
+  if(!res.length){ view.innerHTML=`<div class="card"><h2>결과를 준비 중입니다</h2><p class="muted">잠시 후 다시 확인해 주세요.</p><button class="btn ghost" onclick="go('')">처음으로</button></div>`; return; }
+  view.innerHTML=`<div class="eyebrow">최종 결과</div><h1 style="font-size:clamp(30px,4vw,44px)">선정된 <b>정책제안</b></h1><p class="lead" style="margin-top:12px">위원 검토 점수(50)와 회원투표 점수(50)를 합산한 최종 결과입니다. 선정 제안은 협회 정책건의 과제로 검토·추진합니다.</p>
+    <div class="stack" style="margin:22px 0">${res.map(x=>`<div class="rankcard"><div class="no">${esc(x.시상)}</div><div><span class="chip">${esc(x.제안분야)}</span>${x.세부분야?` <span class="chip sub">${esc(x.세부분야)}</span>`:""} <b style="font-size:17px;font-variation-settings:'wght' 720">${esc(x.제안명)}</b><div class="help" style="margin:4px 0 0">${esc(x.한줄요약||"")}</div></div><div class="score"><b>${x.최종점수}</b><div class="help" style="margin:0">최종점수</div></div></div>`).join("")}</div>
+    <button class="btn ghost" onclick="go('')">처음으로</button>`;
+}
+
+/* ================= 데모 모드 ================= */
+const DEMO_DB=(()=>{
+  const P=(id,base,o)=>Object.assign({신청ID:id,_base:base,접수일시:"2026.10."+(10+(+id.slice(-1))),첨부파일:"",근거자료:""},o);
+  const items=[
+    P("D001",90,{제안명:"사회복지시설 종사자 단일임금체계 단계적 도입",제안분야:"처우개선",세부분야:"임금(임금체계 등)",한줄요약:"시설 유형별로 다른 임금표를 서울시 단일임금체계로 통합해 같은 경력·직급이면 같은 임금을 받도록 합니다.",성명:"김현장",소속기관:"햇살종합사회복지관",직위:"팀장",회원여부:"회원",현황및문제점:"같은 사회복지사 1급·10년 차라도 시설 유형에 따라 월 30만원 이상 임금 차이가 발생해 이직과 사기 저하의 원인이 되고 있습니다.",제안내용:"2027년 임금표 격차 해소 로드맵 수립 → 2028년 단일 임금표 시범 적용 → 2029년 전면 시행. 서울시 인건비 지급기준에 반영.",기대효과:"시설 간 이직 감소, 경력 축적 유인, 처우 형평성 확보",근거자료:"2025 서울시 사회복지시설 종사자 처우 실태조사"}),
+    P("D002",86,{제안명:"사회복지사 심리상담·소진 회복 바우처 서울시 지원",제안분야:"처우개선",세부분야:"복리후생",한줄요약:"감정노동이 많은 사회복지사에게 연 5회 심리상담 바우처를 서울시가 지원합니다.",성명:"이돌봄",소속기관:"늘봄노인복지센터",직위:"사회복지사",회원여부:"회원",현황및문제점:"민원·폭언 등 감정노동 피해가 잦으나 상담 비용 부담으로 방치되는 경우가 많습니다.",제안내용:"서울시복지재단과 협약 상담기관 지정, 종사자 1인당 연 5회 바우처. 익명 온라인 신청.",기대효과:"소진 예방과 조기 개입, 장기근속 유도"}),
+    P("D003",84,{제안명:"경력인정 범위 확대: 타 분야 사회복지 경력 100% 인정",제안분야:"처우개선",세부분야:"경력인정 및 승급",한줄요약:"분야를 옮겨도 사회복지 경력을 100% 인정해 호봉 손실을 없앱니다.",성명:"박경력",소속기관:"함께서는장애인복지관",직위:"과장",회원여부:"회원",현황및문제점:"시설 유형을 옮기면 기존 경력이 50~80%만 인정되어 호봉이 깎입니다.",제안내용:"서울시 인건비 지급기준 경력인정 기준표 개정, 사회복지 관련 경력은 분야와 무관하게 100% 인정.",기대효과:"경력 단절 해소, 인력 이동의 유연성 확보"}),
+    P("D004",80,{제안명:"단기 계약직 사회복지사 무기계약 전환 지원",제안분야:"처우개선",세부분야:"고용 안정",한줄요약:"2년 이상 지속 사업의 1년 단위 계약직을 무기계약으로 전환하도록 지원합니다.",성명:"최안정",소속기관:"",직위:"",회원여부:"비회원",현황및문제점:"보조금 사업 단위 채용으로 매년 고용 불안을 겪습니다.",제안내용:"2년 이상 지속된 보조사업 인력의 무기계약 전환 시 인건비 차액을 시가 보전.",기대효과:"고용 안정과 서비스 연속성 확보"}),
+    P("D005",82,{제안명:"폭언·폭행 피해 종사자 보호 핫라인 및 법률지원",제안분야:"처우개선",세부분야:"안전과 인권",한줄요약:"이용자 폭언·폭행 피해 시 즉시 연결되는 보호 핫라인과 무료 법률지원을 운영합니다.",성명:"한보호",소속기관:"마음뜰아동보호전문기관",직위:"팀장",회원여부:"회원",현황및문제점:"피해 발생 시 개인이 감당하는 구조로 신고·대응을 포기하는 경우가 많습니다.",제안내용:"서울시·협회 공동 핫라인, 변호사 자문 연 2회 무료, 피해 종사자 유급휴가 보장.",기대효과:"종사자 안전권 보장"}),
+    P("D006",76,{제안명:"육아기 사회복지사 유연근무·재택근무 가이드라인",제안분야:"처우개선",세부분야:"일가정양립 등",한줄요약:"육아기 종사자가 시차출퇴근·재택근무를 쓸 수 있도록 시설 유형별 가이드라인을 만듭니다.",성명:"오가정",소속기관:"푸른노인종합복지관",직위:"사회복지사",회원여부:"회원",현황및문제점:"유연근무 제도가 있어도 적용 기준이 없어 쓰지 못합니다.",제안내용:"서울시 복지시설 유연근무 표준 가이드라인 배포, 우수 시설 인센티브.",기대효과:"경력 단절 예방, 일·가정 양립"}),
+    P("D007",88,{제안명:"1인가구 위기 조기발견 동네 복지안전망",제안분야:"대시민복지정책",세부분야:"1인가구·고독사 예방",한줄요약:"편의점·약국 등 생활거점과 복지관을 연결해 고립 위험 1인가구를 조기에 발견·연계합니다.",성명:"신시민",소속기관:"이음종합사회복지관",직위:"과장",회원여부:"회원",현황및문제점:"고독사 위험군이 복지 서비스에 닿기 전 사각지대에 머무는 기간이 깁니다.",제안내용:"동 단위 생활거점 100곳을 안전망 거점으로 지정, 이상징후 신고 → 복지관 사례관리 연계.",기대효과:"고독사 예방, 지역 기반 돌봄망 강화"}),
+    P("D008",74,{제안명:"돌봄 공백 시간대(야간·주말) 긴급돌봄 바우처",제안분야:"대시민복지정책",세부분야:"돌봄",한줄요약:"맞벌이·한부모 가정의 야간·주말 돌봄 공백을 메우는 긴급돌봄 바우처를 도입합니다.",성명:"강돌봄",소속기관:"",직위:"",회원여부:"비회원",현황및문제점:"기존 돌봄 서비스가 평일 주간 중심이라 야간·주말 공백이 큽니다.",제안내용:"연 20시간 긴급돌봄 바우처, 돌봄기관 야간 운영 인건비 지원.",기대효과:"돌봄 공백 해소"}),
+  ];
+  const judges=["심사위원1","심사위원2","심사위원3"], scores={};
+  items.forEach(it=>{ scores[it.신청ID]={}; judges.forEach((j,k)=>{ const sc={}; let t=0; CRITERIA.forEach(c=>{ const idx=Math.max(0,Math.min(4,Math.round((100-it._base)/100*4+[-0.4,0.3,0][k]))); sc[c.key]=c.ladder[idx]; t+=c.ladder[idx]; }); sc.합계=t; scores[it.신청ID][j]=sc; }); });
+  const finalists=items.slice().sort((a,b)=>b._base-a._base).slice(0,5).map(i=>i.신청ID);
+  const votes=[], w=[14,12,10,9,8];
+  for(let v=0;v<60;v++){ const pool=finalists.map((_,i)=>i), picks=[]; while(picks.length<2){ const tw=pool.reduce((a,i)=>a+w[i],0); let r=Math.random()*tw, pk=pool[0]; for(const i of pool){ r-=w[i]; if(r<=0){pk=i;break;} } picks.push(finalists[pk]); pool.splice(pool.indexOf(pk),1); } picks.forEach(id=>votes.push({성명:"예시"+v,생년월일:"000000",신청ID:id})); }
+  return {stage:"신청",items,judges,scores,finalists,votes,members:[["김서울","850312"],["이복지","900707"],["박나눔","780925"]],N:5,K:2,Q:"회원명단",name:"2026 서울사회복지사 정책제안 (미리보기)"};
+})();
+function demoVoteStats(){ const counts={}, seen=new Set(); DEMO_DB.votes.forEach(v=>{ counts[v.신청ID]=(counts[v.신청ID]||0)+1; seen.add(v.성명+"|"+v.생년월일); }); return {counts,voters:seen.size,total:DEMO_DB.votes.length}; }
+function demoResults(){ const f=DEMO_DB.finalists; if(!f.length) return []; const r2=n=>Math.round(n*100)/100, vs=demoVoteStats();
+  const rows=f.map(id=>{ const it=DEMO_DB.items.find(i=>i.신청ID===id); const s=Object.values(DEMO_DB.scores[id]||{}).map(x=>x.합계); const jp=s.length?s.reduce((a,b)=>a+b,0)/s.length:0; const votes=vs.counts[id]||0, rate=vs.voters?votes/vs.voters:0;
+    return {신청ID:id,제안명:it.제안명,제안분야:it.제안분야,세부분야:it.세부분야,한줄요약:it.한줄요약,심사위원수:s.length,위원회점수:r2(jp),득표수:votes,득표율:r2(rate*100),투표점수:r2(rate*50),최종점수:r2(jp+rate*50),유효투표자:vs.voters}; }).sort((a,b)=>b.최종점수-a.최종점수);
+  rows.forEach((r,i)=>{ r.순위=i+1; r.시상=i<3?(i+1)+"위":(i<5?"장려":""); }); return rows; }
+async function mockApi(action,b){
+  await new Promise(r=>setTimeout(r,220)); const D=DEMO_DB, cfg={행사명:D.name,단계:D.stage,본선개수:D.N,투표선택수:D.K,투표자격:D.Q};
+  switch(action){
+    case "config": return {ok:true,config:cfg};
+    case "list": return {ok:true,items:D.items.filter(i=>i.공개!==false).slice().reverse().map(i=>({신청ID:i.신청ID,접수일시:i.접수일시,제안명:i.제안명,제안분야:i.제안분야,세부분야:i.세부분야,한줄요약:i.한줄요약,현황및문제점:i.현황및문제점,제안내용:i.제안내용,기대효과:i.기대효과}))};
+    case "submitApplication": { const id="P"+Date.now().toString().slice(-8); D.items.push(Object.assign({신청ID:id,_base:70,접수일시:new Date().toLocaleDateString("ko-KR"),첨부파일:b.file?"(데모) "+b.file.name:""},b)); return {ok:true,id,제안명:b.제안명,접수일시:new Date().toLocaleString("ko-KR")}; }
+    case "judgeLogin": { if(!["1001","1002","1003"].includes(String(b.code))) return {ok:false,error:"코드가 올바르지 않습니다. (데모: 1001)"}; const name="심사위원"+String(b.code).slice(-1); return {ok:true,심사위원명:name,stage:D.stage,criteria:CRITERIA,items:D.items.map(it=>Object.assign({},it,{내점수:(D.scores[it.신청ID]||{})[name]||null}))}; }
+    case "saveScore": { const t=Object.values(b.scores||{}).reduce((a,c)=>a+Number(c),0); (D.scores[b.appId]=D.scores[b.appId]||{})[b.judge]=Object.assign({},b.scores,{합계:t}); return {ok:true,total:t}; }
+    case "adminData": { if(b.password!=="admin1234") return {ok:false,error:"관리자 비밀번호가 올바르지 않습니다. (데모: admin1234)"};
+      const apps=D.items.map(it=>{ const s=Object.values(D.scores[it.신청ID]||{}); const sum=s.reduce((a,c)=>a+c.합계,0); const 항목평균={}; CRITERIA.forEach(c=>항목평균[c.key]=s.length?Math.round(s.reduce((a,x)=>a+x[c.key],0)/s.length*100)/100:0); return {신청ID:it.신청ID,제안명:it.제안명,제안분야:it.제안분야,세부분야:it.세부분야,성명:it.성명,소속기관:it.소속기관,회원여부:it.회원여부,공개:it.공개!==false,채점수:s.length,평균:s.length?Math.round(sum/s.length*100)/100:0,항목평균,본선:D.finalists.includes(it.신청ID)}; }).sort((a,b)=>b.평균-a.평균);
+      const vs=demoVoteStats(); return {ok:true,config:cfg,judgeCount:3,applications:apps,finalists:D.finalists,voteTotal:vs.total,voters:vs.voters,results:demoResults(),criteria:CRITERIA,supabase:false,memberCount:D.members.length}; }
+    case "exportData": { const H=["신청ID","제안명","제안분야","세부분야","한줄요약","성명","소속기관","현황및문제점","제안내용","기대효과"]; const vs=demoVoteStats(); return {ok:true,제안내역:[H].concat(D.items.map(it=>H.map(h=>it[h]||""))),심사집계:[["신청ID","제안명","위원회점수(평균/50)"]].concat(D.items.map(it=>{const s=Object.values(D.scores[it.신청ID]||{}).map(x=>x.합계);return [it.신청ID,it.제안명,s.length?s.reduce((a,c)=>a+c,0)/s.length:""]})),투표집계:[["신청ID","득표수"]].concat(D.finalists.map(id=>[id,vs.counts[id]||0]))}; }
+    case "setFinalists": D.finalists=b.ids||[]; return {ok:true};
+    case "setStage": D.stage=b.stage; return {ok:true,stage:b.stage};
+    case "setConfig": { if(b.행사명) D.name=b.행사명; if(b.본선개수) D.N=parseInt(b.본선개수,10)||D.N; if(b.투표선택수) D.K=parseInt(b.투표선택수,10)||D.K; if(b.투표자격) D.Q=b.투표자격; D.finalists=D.items.slice().sort((a,c)=>c._base-a._base).slice(0,D.N).map(i=>i.신청ID); return {ok:true,msg:"설정 저장 완료(데모)"}; }
+    case "setVisibility": { const it=D.items.find(i=>i.신청ID===b.appId); if(it) it.공개=!!b.visible; return {ok:true}; }
+    case "syncSupabase": case "importVotes": return {ok:false,error:"미리보기 모드에서는 사용할 수 없습니다."};
+    case "ballot": return {ok:true,items:D.stage!=="투표"?[]:D.finalists.map(id=>D.items.find(i=>i.신청ID===id)).filter(Boolean)};
+    case "results": return {ok:true,results:demoResults()};
+    case "verifyMember": { const n=String(b.name||"").replace(/\s/g,""), bd=String(b.birth||""); if(!n||bd.length!==6) return {ok:false,error:"성함과 생년월일 6자리를 정확히 입력해 주세요."}; if(D.Q==="회원명단"&&!D.members.some(m=>m[0]===n&&m[1]===bd)) return {ok:false,error:"회비납부 회원 명단에서 확인되지 않습니다. (데모: 김서울/850312)"}; if(D.votes.some(v=>v.성명===n&&v.생년월일===bd)) return {ok:false,error:"이미 투표에 참여하셨습니다."}; return {ok:true}; }
+    case "submitVote": { const v=await mockApi("verifyMember",b); if(!v.ok) return v; const ids=[...new Set(b.appIds||[])]; if(ids.length!==D.K) return {ok:false,error:`서로 다른 제안 ${D.K}건을 선택해 주세요.`}; ids.forEach(id=>D.votes.push({성명:String(b.name).replace(/\s/g,""),생년월일:b.birth,신청ID:id})); return {ok:true}; }
+    default: return {ok:false,error:"알 수 없는 요청"};
+  }
+}
+</script>
+</body>
+</html>
