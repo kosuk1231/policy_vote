@@ -114,6 +114,16 @@
   .pill span{display:inline-block;padding:9px 16px;border:1px solid var(--ism-color-border);border-radius:999px;font-size:14.5px;font-variation-settings:"wght" 560;background:var(--ism-color-background);cursor:pointer;transition:font-variation-settings var(--ism-motion-duration) var(--ism-motion-easing),background-color var(--ism-motion-duration) var(--ism-motion-easing)}
   .pill:hover span{font-variation-settings:"wght" 800;border-color:var(--ism-color-foreground)}
   .pill input:checked+span{background:var(--ism-color-foreground);border-color:var(--ism-color-foreground);color:var(--ism-color-background);font-variation-settings:"wght" 760}
+  .fieldpick{display:grid;grid-template-columns:1fr 1fr;gap:var(--ism-gutter)}
+  @media(max-width:700px){.fieldpick{grid-template-columns:1fr}}
+  .fcard{position:relative;display:flex;flex-direction:column;gap:6px;padding:22px 20px 20px;border:2px solid var(--ism-color-border);border-radius:8px;background:var(--ism-color-background);cursor:pointer;transition:border-color var(--ism-motion-duration) var(--ism-motion-easing),background-color var(--ism-motion-duration) var(--ism-motion-easing)}
+  .fcard input{position:absolute;opacity:0;width:0;height:0;margin:0}
+  .fcard .idx{font-family:var(--display);font-size:12px;letter-spacing:.08em;color:var(--ism-color-muted);font-variation-settings:"wght" 600}
+  .fcard .ft{font-family:var(--display);font-size:24px;letter-spacing:-.02em;font-variation-settings:"wght" 700;transition:font-variation-settings var(--ism-motion-duration) var(--ism-motion-easing)}
+  .fcard .fd{font-size:13.5px;color:#3a3d3b;line-height:1.5}
+  .fcard:hover{border-color:var(--ism-color-foreground)} .fcard:hover .ft{font-variation-settings:"wght" 860}
+  .fcard.on{border-color:var(--ism-color-accent);background:var(--ism-color-4)} .fcard.on .ft{color:var(--ism-color-accent);font-variation-settings:"wght" 860} .fcard.on .idx{color:var(--ism-color-accent)}
+  .bad .fcard{border-color:var(--warn)}
   .chkrow{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--ism-color-border);border-radius:4px;background:var(--ism-color-background);cursor:pointer}
   .chkrow+.chkrow{margin-top:8px} .chkrow input{width:18px;height:18px;margin:2px 0 0;padding:0;accent-color:var(--ism-color-accent);flex:none}
   .chkrow b{display:block;font-size:14.5px;font-variation-settings:"wght" 700} .chkrow small{display:block;font-size:12.5px;color:var(--ism-color-muted);line-height:1.5;margin-top:3px}
@@ -282,16 +292,18 @@ async function render(){
   if(route==="admin") return viewAdmin(view);
   return viewHome(view);
 }
+const APPLY_OPEN=s=>s==="신청"||s==="체험", VOTE_OPEN=s=>s==="투표"||s==="체험";
 function steps(cur){
-  const ss=["신청","심사","투표","종료"], lb={"신청":"제안 접수","심사":"내부 심사","투표":"온라인 투표","종료":"결과 발표"}, idx=ss.indexOf(cur);
-  return `<div class="steps">${ss.map((s,i)=>`<div class="step ${i<idx?"done":""} ${i===idx?"active":""}"><div class="n">0${i+1}</div><div class="t">${lb[s]}</div></div>`).join("")}</div>`;
+  const ss=["신청","심사","투표","종료"], lb={"신청":"제안 접수","심사":"내부 심사","투표":"온라인 투표","종료":"결과 발표"}, idx=ss.indexOf(cur), trial=cur==="체험";
+  return `<div class="steps">${ss.map((s,i)=>`<div class="step ${i<idx?"done":""} ${i===idx||(trial&&(i===0||i===2))?"active":""}"><div class="n">0${i+1}</div><div class="t">${lb[s]}</div></div>`).join("")}</div>${trial?`<div class="badge" style="margin-top:-18px;margin-bottom:18px"><span class="pip"></span>체험 모드 · 제안 접수와 온라인 투표가 동시에 열려 있습니다</div>`:""}`;
 }
 const secttl=(n,t)=>`<div class="secttl"><span class="n">${n}</span><h2>${t}</h2></div>`;
 
 /* ================= 홈 ================= */
 function viewHome(view){
   const c=STATE.config, st=c.단계, N=c.본선개수, K=c.투표선택수||2;
-  const cta = st==="신청" ? `<button class="btn accent" onclick="go('apply')">정책 제안하기 →</button><button class="btn ghost" onclick="go('list')">공개 목록 보기</button>`
+  const cta = st==="체험" ? `<button class="btn accent" onclick="go('apply')">정책 제안하기 →</button><button class="btn" onclick="go('vote')">온라인 투표 참여하기 →</button><button class="btn ghost" onclick="go('list')">공개 목록 보기</button>`
+            : st==="신청" ? `<button class="btn accent" onclick="go('apply')">정책 제안하기 →</button><button class="btn ghost" onclick="go('list')">공개 목록 보기</button>`
             : st==="투표" ? `<button class="btn accent" onclick="go('vote')">온라인 투표 참여하기 →</button><button class="btn ghost" onclick="go('list')">공개 목록 보기</button>`
             : st==="종료" ? `<button class="btn accent" onclick="go('vote')">최종 결과 보기 →</button><button class="btn ghost" onclick="go('list')">공개 목록 보기</button>`
             : `<button class="btn ghost" onclick="go('list')">공개 목록 보기</button><span class="badge"><span class="pip"></span>내부 심사가 진행 중입니다</span>`;
@@ -387,11 +399,11 @@ function openPrivacy(){ const bg=document.createElement("div"); bg.className="mo
 const DRAFT_KEY="pp_draft_v1"; let PENDING_FILE=null;
 function viewApply(view){
   const c=STATE.config;
-  if(c.단계!=="신청"){ view.innerHTML=`<div class="card"><h2>지금은 접수 기간이 아닙니다</h2><p class="muted">${CONFIG.PERIOD?"접수기간: "+esc(CONFIG.PERIOD):"접수가 열리면 이곳에서 제안할 수 있습니다."}</p><button class="btn ghost" onclick="go('')">처음으로</button></div>`; return; }
+  if(!APPLY_OPEN(c.단계)){ view.innerHTML=`<div class="card"><h2>지금은 접수 기간이 아닙니다</h2><p class="muted">${CONFIG.PERIOD?"접수기간: "+esc(CONFIG.PERIOD):"접수가 열리면 이곳에서 제안할 수 있습니다."}</p><button class="btn ghost" onclick="go('')">처음으로</button></div>`; return; }
   const fieldHtml=(k,type,req,ph,help)=>{
     const lab=`<label class="${req?'req':'opt'}" for="f_${k}">${LABEL[k]||k}</label>`, hp=help?`<div class="help">${help}</div>`:"";
     if(type==="textarea"||type==="short") return `<div class="f" data-k="${k}">${lab}${hp}<textarea id="f_${k}" placeholder="${ph}" style="${type==='short'?'min-height:70px':''}"></textarea><div class="cnt" id="cnt_${k}">0자</div></div>`;
-    if(type==="field") return `<div class="f" data-k="${k}">${lab}<div class="help">대시민복지정책 또는 처우개선 중 하나를 선택합니다.</div><div class="pills">${FIELDS.map(v=>`<label class="pill"><input type="radio" name="제안분야" value="${esc(v)}" onchange="onFieldChange()"><span>${esc(v)}</span></label>`).join("")}</div></div>`;
+    if(type==="field") return `<div class="f" data-k="${k}">${lab}<div class="help">대시민복지정책 또는 처우개선 중 하나를 선택합니다.</div><div class="fieldpick">${FIELDS.map((v,i)=>`<label class="fcard"><input type="radio" name="제안분야" value="${esc(v)}" onchange="onFieldChange();syncFieldCards()"><span class="idx">0${i+1}</span><span class="ft">${esc(v)}</span><span class="fd">${esc(FIELD_DESC[v])}</span></label>`).join("")}</div></div>`;
     if(type==="subfield") return `<div class="f" data-k="세부분야" id="subWrap" style="display:none"></div>`;
     if(type==="file") return `<div class="f" data-k="${k}">${lab}${hp}<div class="filebox"><input type="file" id="f_${k}" accept="image/*,.pdf,.doc,.docx,.hwp,.hwpx,.ppt,.pptx,.xls,.xlsx,.zip"><div class="help" id="fileMsg" style="margin:6px 0 0">선택된 파일 없음</div></div></div>`;
     const attrs=type==="tel"?'inputmode="tel" type="tel"':type==="email"?'type="email" inputmode="email"':type==="birth"?'inputmode="numeric" maxlength="6" pattern="[0-9]*"':'';
@@ -418,6 +430,7 @@ function viewApply(view){
     </form>`;
   bindApply(); restoreDraft(); window.dispatchEvent(new Event("scroll"));
 }
+function syncFieldCards(){ document.querySelectorAll(".fcard").forEach(c=>c.classList.toggle("on",c.querySelector("input").checked)); }
 function onFieldChange(keepSub){
   const r=document.querySelector('input[name="제안분야"]:checked'), w=$("#subWrap"); if(!w) return;
   if(!r){ w.style.display="none"; w.innerHTML=""; return; }
@@ -447,7 +460,7 @@ function collectApply(){
 function saveDraft(){ try{ const d=collectApply(); d._ts=Date.now(); localStorage.setItem(DRAFT_KEY,JSON.stringify(d)); showDraftBar(d._ts); }catch(e){} }
 function restoreDraft(){
   try{ const raw=localStorage.getItem(DRAFT_KEY); if(!raw){ showDraftBar(null); return; } const d=JSON.parse(raw);
-    if(d.제안분야){ const r=document.querySelector(`input[name="제안분야"][value="${CSS.escape(d.제안분야)}"]`); if(r){ r.checked=true; onFieldChange(d.세부분야||""); } }
+    if(d.제안분야){ const r=document.querySelector(`input[name="제안분야"][value="${CSS.escape(d.제안분야)}"]`); if(r){ r.checked=true; onFieldChange(d.세부분야||""); syncFieldCards(); } }
     if(d.회원여부){ const r=document.querySelector(`input[name="회원여부"][value="${CSS.escape(d.회원여부)}"]`); if(r) r.checked=true; }
     Object.keys(d).forEach(k=>{ if(["_ts","제안분야","세부분야","회원여부"].includes(k)) return; const cb=$("#c_"+k); if(cb){ cb.checked=d[k]==="Y"; return; } const el=$("#f_"+k); if(el&&el.type!=="file"){ el.value=d[k]; const c=$("#cnt_"+k); if(c) c.textContent=(d[k]||"").length+"자"; } });
     showDraftBar(d._ts);
@@ -542,11 +555,12 @@ function viewAdmin(view){
 async function adminLogin(){ ADMIN_PW=$("#apw").value; const btn=$("#abtn"); btn.disabled=true; btn.innerHTML='<span class="spin"></span>'; const r=await apiPost({action:"adminData",password:ADMIN_PW}); btn.disabled=false; btn.textContent="로그인"; if(r.ok){ STATE.admin=r; renderAdmin($("#view")); } else $("#aMsg").innerHTML=`<div class="err">${esc(r.error||"로그인 실패")}</div>`; }
 async function reloadAdmin(){ const r=await apiPost({action:"adminData",password:ADMIN_PW}); if(r.ok){ STATE.admin=r; renderAdmin($("#view")); } }
 function renderAdmin(view){
-  const d=STATE.admin, c=d.config, N=c.본선개수, K=c.투표선택수||2, stages=["신청","심사","투표","종료"];
+  const d=STATE.admin, c=d.config, N=c.본선개수, K=c.투표선택수||2, stages=["신청","심사","투표","종료","체험"];
   view.innerHTML=`<div class="toolbar"><div><div class="eyebrow">관리자</div><h2 style="margin:0">${esc(c.행사명)}</h2></div><span class="spacer"></span><button class="btn ghost sm" onclick="exportExcel()">엑셀 다운로드</button><button class="btn ghost sm" onclick="reloadAdmin()">새로고침</button><button class="btn ghost sm" onclick="STATE.admin=null;render()">로그아웃</button></div>
     <div class="stack">
     <div class="card"><h3>단계 관리</h3>${steps(c.단계)}
-      <div class="toolbar" style="margin:0">${stages.map(s=>`<button class="btn ${s===c.단계?'accent':'ghost'} sm" onclick="setStage('${s}')">${{"신청":"제안 접수","심사":"내부 심사","투표":"투표 개시","종료":"결과 발표"}[s]}</button>`).join("")}</div><div id="stageMsg"></div>
+      <div class="toolbar" style="margin:0">${stages.map(s=>`<button class="btn ${s===c.단계?'accent':'ghost'} sm" onclick="setStage('${s}')" ${s==="체험"?'style="margin-left:auto"':''}>${{"신청":"제안 접수","심사":"내부 심사","투표":"투표 개시","종료":"결과 발표","체험":"체험 모드"}[s]}</button>`).join("")}</div>
+      <p class="help" style="margin:8px 0 0">체험 모드: 접수와 투표를 동시에 열어 시연·연습용으로 씁니다(투표 대상은 현재 본선). 실제 투표 전에는 <code>clearVotes</code>로 체험 투표를 비우세요.</p><div id="stageMsg"></div>
       <hr class="hr"><b style="font-variation-settings:'wght' 760">기본 설정</b> <span class="help" style="display:inline;margin:0">('설정' 시트 값 · 화면 전체 반영)</span>
       <div class="cfg3" style="margin-top:10px"><div><label>행사명</label><input id="cfg_name" value="${esc(c.행사명)}"></div><div><label>내부 심사 선정 건수</label><input id="cfg_n" type="number" min="1" value="${N}"></div><div><label>1인 투표 선택 건수</label><input id="cfg_k" type="number" min="1" value="${K}"></div>
         <div><label>투표 자격</label><select id="cfg_q"><option value="누구나" ${c.투표자격==="누구나"?"selected":""}>1인 1투표(휴대전화 인증·카카오 로그인)</option><option value="회원명단" ${c.투표자격!=="누구나"?"selected":""}>회비납부 회원(명단 대조)</option></select></div></div>
@@ -585,7 +599,7 @@ const AUTH_ERR=m=>{ m=String(m||""); if(/after \d+ seconds|rate limit|too many/i
 async function viewVote(view){
   const st=STATE.config.단계;
   if(st==="종료") return renderFinalPublic(view);
-  if(st!=="투표"){ view.innerHTML=`<div class="card"><h2>투표 기간이 아닙니다</h2><p class="muted">온라인 투표가 열리면 이곳에서 참여할 수 있습니다.</p><button class="btn ghost" onclick="go('')">처음으로</button></div>`; return; }
+  if(!VOTE_OPEN(st)){ view.innerHTML=`<div class="card"><h2>투표 기간이 아닙니다</h2><p class="muted">온라인 투표가 열리면 이곳에서 참여할 수 있습니다.</p><button class="btn ghost" onclick="go('')">처음으로</button></div>`; return; }
   if(VOTE_IDENTITY) return renderBallot(view);
   if(STATE.config.투표자격==="회원명단") return renderMemberAuth(view);
   // 1인 1투표 모드: 로그인 세션(카카오 리다이렉트 복귀 포함) 확인
@@ -734,7 +748,7 @@ async function mockApi(action,b){
     case "setConfig": { if(b.행사명) D.name=b.행사명; if(b.본선개수) D.N=parseInt(b.본선개수,10)||D.N; if(b.투표선택수) D.K=parseInt(b.투표선택수,10)||D.K; if(b.투표자격) D.Q=b.투표자격; D.finalists=D.items.slice().sort((a,c)=>c._base-a._base).slice(0,D.N).map(i=>i.신청ID); return {ok:true,msg:"설정 저장 완료(데모)"}; }
     case "setVisibility": { const it=D.items.find(i=>i.신청ID===b.appId); if(it) it.공개=!!b.visible; return {ok:true}; }
     case "syncSupabase": case "importVotes": return {ok:false,error:"미리보기 모드에서는 사용할 수 없습니다."};
-    case "ballot": return {ok:true,items:D.stage!=="투표"?[]:D.finalists.map(id=>D.items.find(i=>i.신청ID===id)).filter(Boolean)};
+    case "ballot": return {ok:true,items:(D.stage!=="투표"&&D.stage!=="체험")?[]:D.finalists.map(id=>D.items.find(i=>i.신청ID===id)).filter(Boolean)};
     case "results": return {ok:true,results:demoResults()};
     case "verifyMember": { const n=String(b.name||"").replace(/\s/g,""), bd=String(b.birth||""); if(!n||bd.length!==6) return {ok:false,error:"성함과 생년월일 6자리를 정확히 입력해 주세요."}; if(D.Q==="누구나"&&D.votes.some(v=>v.성명===n)) return {ok:false,error:"이미 투표에 참여하셨습니다."}; if(D.Q==="회원명단"&&!D.members.some(m=>m[0]===n&&m[1]===bd)) return {ok:false,error:"회비납부 회원 명단에서 확인되지 않습니다. (데모: 김서울/850312)"}; if(D.votes.some(v=>v.성명===n&&v.생년월일===bd)) return {ok:false,error:"이미 투표에 참여하셨습니다."}; return {ok:true}; }
     case "submitVote": { const v=await mockApi("verifyMember",b); if(!v.ok) return v; const ids=[...new Set(b.appIds||[])]; if(ids.length!==D.K) return {ok:false,error:`서로 다른 제안 ${D.K}건을 선택해 주세요.`}; ids.forEach(id=>D.votes.push({성명:String(b.name).replace(/\s/g,""),생년월일:b.birth,신청ID:id})); return {ok:true}; }
